@@ -1,0 +1,31 @@
+{% extends 'MDBAssetBundle::layout.html.twig' %}
+
+{% block page_header %}{% endblock %}
+{% block content_row %}
+<div class="row">
+	<h1 class="span12" style="margin: 20px 0 20px 20px">Create new Asset</h1>
+
+	<div class="span8">
+		<form class="form-horizontal" action="{{ path('mdb_asset_admin_new') }}" method="post" {{ form_enctype(form) }}>
+			
+
+			    <input id="asset_name" name="asset[name]" placeholder="Title" class="title large span8 important" type="text">
+			    <textarea class="span8" name="asset[description]" id="asset_description" cols="30" rows="10" placeholder="detail description" style="margin:15px 0px 15px 0px"></textarea>
+
+			    <input class="btn btn-primary btn-large pull-right" type="submit" value="Save the new Asset" />
+		    {{ form_row(form._token) }}
+
+		    <a class="btn btn-danger" href="{{ path('mdb_asset_asset_index') }}">Cancel</a>
+		</form>
+	</div>
+	
+</div>
+<!-- end of content_row-->
+{% endblock %}
+
+{% block page_script %}
+	{% javascripts '@MDBAssetBundle/Resources/public/js/mdb_asset_new.js'  %}
+	    <script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
+

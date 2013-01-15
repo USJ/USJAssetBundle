@@ -1,0 +1,34 @@
+{% extends 'MDBAssetBundle::layout.html.twig' %}
+
+{% block head_style %}
+{{ parent() }}
+<link rel="stylesheet" href="/js/libs/select2/select2.css">
+{% endblock %}
+
+{% block headline %}
+	<a href="{{ path('mdb_asset_asset_index') }}">Back</a>
+
+	Update asset
+{% endblock %}
+{% block content %}
+<form id="asset_form" action="{{ path('mdb_asset_asset_edit', {"refId": form.refId.vars.value }) }}" method="POST">
+	{{ form_row(form.name) }}
+	
+	{{ form_row(form.description) }}
+
+	{{ form_row(form.refId) }}
+
+	{{ form_row(form.status) }}
+
+	{{ form_row(form.properties ) }}
+
+	{{ form_rest(form) }}
+	<button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}
+
+{% block foot_script %}
+	{{ parent() }}
+	<script type="text/javascript" src="/js/libs/select2/select2.js"></script>
+
+{% endblock %}

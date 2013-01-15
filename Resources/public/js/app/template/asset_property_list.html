@@ -1,0 +1,15 @@
+<h5>Manufacturer Property</h5>
+<table class="table table-condensed table-hover">
+	<tbody>	
+		<% _.each(properties, function(item){ %>
+			<tr data-property-id="<%= item.id %>">
+				<td><%= item.property %></td>
+				<td><%= item.value %><i class="property-delete-btn pull-right icon-trash"></i></td>
+			</tr>
+		<% }); %>
+		<tr id="property_new_row">
+			<td><input style="width: 90%;" class="input-small" type="text" id="properties_new_key" placeholder="New property" /></td>
+			<td><input style="width: 90%;" class="input-small" type="text" id="properties_new_value" placeholder="New value" /></td>
+		</tr>
+	</tbody>
+</table>	

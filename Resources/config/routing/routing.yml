@@ -1,0 +1,29 @@
+# mdb_asset_asset_index:
+#     pattern: /assets
+#     defaults:  { _controller: MDBAssetBundle:Asset:index }
+
+# mdb_asset_asset_new:
+#     pattern: /asset/new
+#     defaults:  { _controller: MDBAssetBundle:Asset:new }
+
+# mdb_asset_asset_show:
+#     pattern: /asset/show/{refId}
+#     defaults:  { _controller: MDBAssetBundle:Asset:show}
+
+# mdb_asset_asset_edit:
+#     pattern: /asset/edit/{refId}
+#     defaults:  { _controller: MDBAssetBundle:Asset:edit}
+
+# mdb_asset_status_new:
+#     pattern: /asset/status/new
+#     defaults:  { _controller: MDBAssetBundle:Status:new }
+
+
+mdbasset_asset:
+    resource: "@MDBAssetBundle/Controller/AssetController.php"
+    type: annotation
+
+mdbasset_status:
+    resource: "@MDBAssetBundle/Controller/StatusController.php"
+    type: annotation
+    prefix: /assets/status

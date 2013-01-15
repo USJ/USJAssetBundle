@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+{% block content %}{% endblock %}
+{% block title %}MDB | Assets Management{% endblock %}
+
+{% block head_style %}
+    {{ parent() }}
+    {% stylesheets filter="compass"
+        '@MDBAssetBundle/Resources/public/sass/mdb_asset.scss'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    
+{% endblock head_style %}
+
+{% block foot_script %}
+{{ parent() }}
+
+{% javascripts '@MDBAssetBundle/Resources/public/js/mdb_asset.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %} 
+
+
+<script type="text/javascript">
+    // parent chooser during asset creation
+    $(document).ready(function() {
+        $("select#mdb_asset_asset_parent").select2();
+    });
+</script>
+{% endblock %}

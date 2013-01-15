@@ -1,0 +1,22 @@
+{% extends 'MDBAssetBundle::layout.html.twig' %}
+{% block title %}Edit{% endblock %}
+{% block headline %}Edit{% endblock %}
+{% block content %}
+<form action="{{ path('mdb_asset_admin_edit', {'id': app.request.attributes.get('id') }) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_row(form.name) }}
+
+    {{ form_row(form.code) }}
+
+    {{ form_row(form.parent)}}
+
+    {{ form_row(form.description)}}
+
+    {{ form_rest(form) }}
+
+    <input class="btn btn-success" type="submit" value="Update" />
+    <a href="{{ path('mdb_asset_asset_index')}}" class="btn">Cancel</a>
+</form>
+
+<a href="{{ path('mdb_asset_admin_delete', {'id': asset.id }) }}" class="btn btn-danger">Delete</a>
+
+{% endblock %}

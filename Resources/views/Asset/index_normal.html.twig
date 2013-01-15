@@ -1,0 +1,22 @@
+<table class="span12 table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Reference ID</th>
+            <th>Name</th>
+
+            <th>Description</th>
+            <th>Category</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for asset in assets %}
+            <tr>
+                <td><a href="{{ path('mdb_asset_asset_show', {"id":asset.id } ) }}">{{ asset.refId }}</a></td>
+                <td>{{ asset.name }}</td>
+                <td>{{ asset.description }}</td>
+                <td>{{ asset.category }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

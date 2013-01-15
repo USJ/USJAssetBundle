@@ -1,0 +1,47 @@
+{% extends 'MDBAssetBundle::layout.html.twig' %}
+
+{% block headline %}
+    Asset status 
+     <a class="btn btn-info" href="{{ url('mdb_asset_status_new') }}">
+        <i class="icon-plus-sign icon-white"></i> {{ 'index.add'|trans({},'MDBAssetBundle') }}
+    </a>
+{% endblock %}
+{% block content %}
+<div class="span12">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Counted as running</th>
+                <th>Display as default</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for status in statuses %}
+            <tr>
+                <td>{{ status.name }}</td>
+                <td>
+                    {% if status.countedAsRunning == true %}
+                        <i class="icon-ok"></i>
+                    {% else %}
+                        <i class="icon-remove"></i>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if status.isDefault == true %}
+                        <i class="icon-ok"></i>
+                    {% else %}
+                        <i class="icon-remove"></i>
+                    {% endif %}
+                    </td>
+                <td>
+                    <a href="{{ path('mdb_asset_status_delete', {'id': status.id }) }}">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}   
+        </tbody>
+    </table>
+</div>
+{% endblock %}

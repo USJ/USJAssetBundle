@@ -1,0 +1,12 @@
+{% extends 'MDBAssetBundle::layout.html.twig' %}
+
+{% block page_header %}{% endblock %}
+{% block content %}
+<form class="form-horizontal" action="{{ path('mdb_asset_status_edit', {"id":  form.id }) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <input class="btn" type="submit" value="Update" />
+    <a class="btn btn-danger" href="{{ path('mdb_asset_asset_index') }}">Cancel</a>
+</form>
+{% endblock %}
+

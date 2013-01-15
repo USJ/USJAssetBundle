@@ -1,0 +1,19 @@
+<form class="form-search">
+	<div class="input-append pull-right">
+		<input type="text" class="span2 search-query">
+		<button type="submit" class="btn search-button">Search</button>
+	</div>
+</form>
+<table class="span12 table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% _.each(assets,function(item){ %>
+			<tr><td><a href="#show/<%= item.id %>"><%= item.name %></a></td><td><%= item.description %></td></tr>
+		<% }); %>
+	</tbody>
+</table>

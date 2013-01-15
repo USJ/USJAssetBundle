@@ -1,0 +1,46 @@
+<input type="hidden" id="asset_id" value="{{ asset.id }}" />
+	<h1 class="span12"><%= name %></h1>
+	<div id="asset-parent"></div>
+	<div class="span12">
+		<%= description %>
+	</div>	
+	<!-- div for asset property render -->
+	<div class="span4" id="asset_property">
+		<h5>Manufacturer Property</h5>
+		<table class="table table-condensed table-hover">
+			<tbody>	
+				<% _.each(properties, function(item){ %>
+					<tr data-property-id="<%= item.id %>">
+						<td><%= item.property %></td>
+						<td><%= item.value %><i class="property-delete-btn pull-right icon-trash"></i></td>
+					</tr>
+				<% }); %>
+				<tr id="property_new_row">
+					<td><input style="width: 90%;" class="input-small" type="text" id="properties_new_key" placeholder="New property" /></td>
+					<td><input style="width: 90%;" class="input-small" type="text" id="properties_new_value" placeholder="New value" /></td>
+				</tr>
+			</tbody>
+		</table>	
+	</div>
+	<div class="span4">
+	<legend class="simple">Operational Report</legend>
+		
+	</div>
+	<div class="span12">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="#documents" data-toggle="tab">Documents <span class="badge">24</span></a>
+		</li>
+		<li>
+			<a href="#component" data-toggle="tab">Components <span class="badge">4</span></a>
+		</li>
+		<li>
+			<a href="#workorder" data-toggle="tab">Work Orders <span class="badge">3</span></a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div id="document" class="tab-pane active"></div>
+		<div id="component" class="tab-pane active"></div>
+		<div id="workorder" class="tab-pane active"></div>
+	</div>
+</div>
