@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Symfony2 bundle for asset management.",
     "keywords": ["inventory"],
-    "homepage": "https://github.com/gestadieu/mdb",
+    "homepage": "http://dev.openusj.org",
     "license": "MIT",
     "authors": [{
         "name": "Marco Leong",
@@ -16,10 +16,7 @@
         "doctrine/mongodb-odm-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "dev-master"
     },
-    "suggest": {
-    },
     "autoload": {
         "psr-0": { "MDB\\AssetBundle": "" }
-    },
-    "target-dir": "MDB/AssetBundle"
+    }
 }
