@@ -28,9 +28,9 @@ class MDBAssetExtension extends Extension
         $loader->load('services.yml');
         $container->setParameter('mdb_asset.asset.status', $config['asset']['status']);
 
-        if(isset($bundles['FOQElasticaBundle'])) {
-            $loader->load('elastica.yml');
-        }
+        // if(isset($bundles['FOQElasticaBundle'])) {
+        //     $loader->load('elastica.yml');
+        // }
     }
 
 }

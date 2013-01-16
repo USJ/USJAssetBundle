@@ -96,7 +96,7 @@ class AssetController extends Controller
      */
     public function showAction(Request $request, $id)
     {
-        $asset = $this->container->get("mdb_asset.manager.asset")->findAssetBy(array("id" => $id));
+        $asset = $this->container->get("mdb_asset.manager.asset")->findAssetBy(array("_id" => $id));
         if(!$asset) {
             throw $this->createNotFoundException(sprintf("Asset with ID %s was not found.", $id));
         }
