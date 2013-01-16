@@ -10,17 +10,16 @@ use Symfony\Component\Form\AbstractType,
 
 class AssetPropertyType extends AbstractType
 {
+
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('property');
+		$builder->add('name');
 		$builder->add('value');
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-    	$resolver->setDefaults(array(
-    		'data_class' => 'MDB\AssetBundle\Document\AssetProperty'
-    	));
+
     }
 
     public function getName()

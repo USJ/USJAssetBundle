@@ -33,6 +33,17 @@ class StatusManager {
         $this->dm->flush();
     }
 
+    public function saveStatus($status)
+    {
+        $this->doSaveStatus($status);
+    }
+
+    public function doSaveStatus($status)
+    {
+        $this->dm->persist($status);
+        $this->dm->flush();
+    }
+    
     public function findAllStatuses()
     {
         return $this->getRepository()->findAll();    

@@ -1,24 +1,16 @@
-{% extends 'MDBAssetBundle::layout.html.twig' %}
+<form id="asset_form" action="{{ url('mdb_asset_asset_new') }}" method="POST">
+	{{ form_row(form.name) }}
+	
+	{{ form_row(form.description) }}
 
+	{{ form_row(form.referenceId) }}
 
-{% block headline %}Create asset{% endblock %}
-{% block content %}
-<div class="span12">
-    <form id="asset_form" action="{{ url('mdb_asset_asset_new') }}" method="POST">
-    	{{ form_row(form.name) }}
-    	
-    	{{ form_row(form.description) }}
+	{{ form_row(form.status) }}
 
-    	{{ form_row(form.referenceId) }}
+    {{ form_row(form.category) }}
 
-    	{{ form_row(form.status) }}
+    {{ form_row(form.parent, { 'attr': {'class': 'input-large'} }) }}
 
-        {{ form_row(form.category) }}
-
-        {{ form_row(form.parent, { 'attr': {'class': 'input-large'} }) }}
-
-    	{{ form_rest(form) }}
-    	<button type="submit" class="btn btn-primary">Create</button>
-    </form>
-</div>
-{% endblock %}
+	{{ form_rest(form) }}
+	<button type="submit" class="btn btn-primary">Create</button>
+</form>

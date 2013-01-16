@@ -441,9 +441,12 @@ class Asset {
         $this->properties = $properties;
         return $this;
     }
-    public function addProperty($property)
+    public function addProperty($name, $value)
     {
-        $this->properties[] = $property;
+        $this->properties[] = array(
+            'name' => $name,
+            'value' => $value
+            );
         return $this;
     }
 

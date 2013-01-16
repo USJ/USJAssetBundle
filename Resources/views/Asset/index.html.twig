@@ -1,24 +1,13 @@
-{% extends 'MDBAssetBundle::layout.html.twig' %}
-
-{% block headline %}
-
-{% for flashMessage in app.session.flashbag.get('notice') %}
-    <div class="alert">
-        {{ flashMessage }}
-    </div>
-{% endfor %}
-
-Assets Management
-<a class="btn btn-info" href="{{ url('mdb_asset_asset_new') }}">
-    <i class="icon-plus-sign icon-white"></i> {{ 'index.add'|trans({},'MDBAssetBundle') }}
-</a>
-
-{% endblock %}
-
-{% block content %}
-    {% if tree is defined %}
-        {% include 'MDBAssetBundle:Asset:index_tree.html.twig' %}
-    {% else %}
-        {% include 'MDBAssetBundle:Asset:index_normal.html.twig' %}
-    {% endif %}
-{% endblock %}
+<table>
+    <thead> 
+    </thead>
+    <tbody>
+        {% for asset in assets %}
+            <tr>
+                <td>
+                    {{ asset.name }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

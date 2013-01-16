@@ -13,43 +13,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-use MDB\AssetBundle\Document\Asset;
-use MDB\AssetBundle\Document\Status;
-use MDB\AssetBundle\Document\AssetProperty;
-use MDB\AssetBundle\Form\Type\StatusType;
-
 class StatusController extends Controller
 {
-    /**
-     * @Route("/", name="mdb_asset_status_index")
-     * @Method({"GET"})
-     */
     public function indexAction()
     {
-        $status = $this->getManager()->getRepository('MDBAssetBundle:Status')->findAll();
-        return $this->render("MDBAssetBundle:Status:index.html.twig",
-            array(
-                "statuses" => $status
-            )
-        );
+        $statuses = $this->container->get('mdb_asset.manager.status')->findAllStatuses();
+        
+        return $this->render("MDBAssetBundle:Status:index.html.twig", array("statuses" => $statuses));
     }
 
-    /**
-     * @Route("/new", name="mdb_asset_status_new")
-     * @Method({"GET","POST"})
-     */
     public function newAction()
     {
-        $request = $this->getRequest();
         $status = $this->container->get('mdb_asset.manager.status')->createStatus();
-        $form = $this->createForm(new StatusType(), $status);
+        $form = $this->container->get('mdb_asset.form_factory.status')->createForm();
+        $form->setData($status);
+
         if($request->getMethod() == 'POST' ){
             $form->bind($request);
             if($form->isValid() ) {
-                $dm = $this->getManager();
-                $dm->persist($status);
-                $dm->flush();
-                
+                $this->container->get('mdb_asset.manager.status')->saveStatus($status);
                 $this->get('session')->getFlashBag()->add('notice', 'Status created!');
                 return $this->redirect($this->generateUrl('mdb_asset_status_index'));
             }
@@ -57,32 +39,25 @@ class StatusController extends Controller
         return $this->render("MDBAssetBundle:Status:new.html.twig", array('form' => $form->createView()));
     }
     
-    /**
-     * @Route("/{id}/edit", name="mdb_asset_status_edit")
-     * @Method({"GET","POST","PUT"})
-     */
+
     public function editAction(Request $request, $id)
     {
-        $request = $this->getRequest();
         $status = $this->container->get('mdb_asset.manager.status')->findStatusById($id);
-        $form = $this->createForm(new StatusType(), $status);
+        $form = $this->container->get('mdb_asset.form_factory.status')->createForm();
+        $form->setData($status);
+
         if($request->getMethod() == 'POST' ){
             $form->bind($request);
             if($form->isValid() ) {
-                $dm = $this->getManager();
-                $dm->flush($status); 
+                $this->container->get('mdb_asset.manager.status')->saveStatus($status);
 
-                $this->get('session')->getFlashBag()->add('notice', 'Status update!');
+                $this->get('session')->getFlashBag()->add('success', 'Status update!');
                 return $this->redirect($this->generateUrl('mdb_asset_status_index'));
             }
         }
         return $this->render("MDBAssetBundle:Status:edit.html.twig", array('form' => $form->createView()));
     }
 
-    /**
-     * @Route("/{id}/delete", name="mdb_asset_status_delete")
-     * @Method({"GET","DELETE"})
-     */
     public function deleteAction(Request $request, $id)
     {
         $statusManager = $this->container->get('mdb_asset.manager.status');
@@ -92,11 +67,6 @@ class StatusController extends Controller
         $request->getSession()->getFlashBag()->set('notice', 'Status deleted');
 
         return $this->redirect($this->generateUrl('mdb_asset_status_index'));
-    }
-
-    private function getManager()
-    {
-        return $this->container->get('doctrine_mongodb')->getManager();
     }
 }
 

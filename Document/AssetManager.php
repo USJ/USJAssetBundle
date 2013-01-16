@@ -65,7 +65,11 @@ class AssetManager extends BaseAssetManager
 		return $this->repository->findOneBy($criteria);
 	}
 
-
+    public function findAssetById($id)
+    {
+        return $this->repository->findOneBy(array('id'=> $id));
+    }
+    
     /**
      * Find assets with specific criteria
      *
@@ -111,6 +115,7 @@ class AssetManager extends BaseAssetManager
         return $this
             ->findAssets();
     }
+
 
     /**
      *Retrieve all the assets in the database

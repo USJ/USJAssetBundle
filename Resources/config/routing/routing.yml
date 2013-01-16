@@ -1,29 +1,67 @@
-# mdb_asset_asset_index:
-#     pattern: /assets
-#     defaults:  { _controller: MDBAssetBundle:Asset:index }
+# Asset Controller
+mdb_asset_asset_index:
+    pattern: /assets
+    defaults:  { _controller: MDBAssetBundle:Asset:index }
+    requirements:
+        _method: GET
 
-# mdb_asset_asset_new:
-#     pattern: /asset/new
-#     defaults:  { _controller: MDBAssetBundle:Asset:new }
+mdb_asset_asset_new:
+    pattern: /assets/new
+    defaults:  { _controller: MDBAssetBundle:Asset:new }
+    requirements:
+        _method: GET|POST
 
-# mdb_asset_asset_show:
-#     pattern: /asset/show/{refId}
-#     defaults:  { _controller: MDBAssetBundle:Asset:show}
+mdb_asset_asset_show:
+    pattern: /assets/{id}
+    defaults:  { _controller: MDBAssetBundle:Asset:show}
+    requirements:
+        _method: GET
 
-# mdb_asset_asset_edit:
-#     pattern: /asset/edit/{refId}
-#     defaults:  { _controller: MDBAssetBundle:Asset:edit}
+mdb_asset_asset_edit:
+    pattern: /assets/{id}/edit
+    defaults:  { _controller: MDBAssetBundle:Asset:edit}
+    requirements:
+        _method: GET|POST
 
-# mdb_asset_status_new:
-#     pattern: /asset/status/new
-#     defaults:  { _controller: MDBAssetBundle:Status:new }
+mdb_asset_asset_delete:
+    pattern: /assets/{id}
+    defaults:  { _controller: MDBAssetBundle:Asset:delete}
+    requirements:
+        _method: DELETE
 
+mdb_asset_asset_properties_new:
+    pattern: /assets/{id}/properties
+    defaults:  { _controller: MDBAssetBundle:Asset:postProperties}
+    requirements:
+        _method: POST
 
-mdbasset_asset:
-    resource: "@MDBAssetBundle/Controller/AssetController.php"
-    type: annotation
+mdb_asset_asset_properties_delete:
+    pattern: /assets/{id}/properties
+    defaults:  { _controller: MDBAssetBundle:Asset:deleteProperties}
+    requirements:
+        _method: DELETE
 
-mdbasset_status:
-    resource: "@MDBAssetBundle/Controller/StatusController.php"
-    type: annotation
-    prefix: /assets/status
+# Status Controller
+mdb_asset_status_index:
+    pattern: /asset/status
+    defaults:  { _controller: MDBAssetBundle:Status:index }
+    requirements:
+        _method: GET
+
+mdb_asset_status_new:
+    pattern: /asset/status/new
+    defaults:  { _controller: MDBAssetBundle:Status:new }
+    requirements:
+        _method: GET
+
+mdb_asset_status_edit:
+    pattern: /asset/status/{id}
+    defaults:  { _controller: MDBAssetBundle:Status:edit }
+    requirements:
+        _method: GET|POST
+
+mdb_asset_status_delete:
+    pattern: /asset/status/{id}
+    defaults:  { _controller: MDBAssetBundle:Status:delete }
+    requirements:
+        _method: DELETE
