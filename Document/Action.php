@@ -11,19 +11,29 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Action 
 {
-	/** @MongoDB\Id */
+	/** 
+     * @MongoDB\Id 
+     */
 	protected $id;
 
-	/** @MongoDB\String */
+	/** 
+     * @MongoDB\String
+     */
 	protected $type;
 
-	/** @MongoDB\Timestamp */
+	/** 
+     * @MongoDB\Timestamp
+     */
 	protected $createdAt;
 
-    /** @MongoDB\Hash */
+    /** 
+     * @MongoDB\Hash 
+     */
     protected $properties = array();
 
-    /** @MongoDB\String */
+    /**
+     * @MongoDB\String
+     */
     protected $message;
 
 

@@ -26,11 +26,8 @@ class MDBAssetExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-        $container->setParameter('mdb_asset.asset.status', $config['asset']['status']);
 
-        // if(isset($bundles['FOQElasticaBundle'])) {
-        //     $loader->load('elastica.yml');
-        // }
+        $container->setParameter('mdb_asset.form.asset.type', $config['asset']['form']['type']);
+        $container->setParameter('mdb_asset.form.asset.name', $config['asset']['form']['name']);
     }
-
 }

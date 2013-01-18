@@ -69,6 +69,11 @@ class Status {
         return $this->countedAsRunning;
     }
 
+    public function isCountedAsRunning()
+    {
+        return $this->countedAsRunning;
+    }
+
     /**
      * Set name
      *

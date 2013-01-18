@@ -7,11 +7,13 @@ class StatusManager {
 
     protected $dm;
     protected $class;
+    protected $repository;
 
     public function __construct($dm, $class)
     {
         $this->dm = $dm;
         $this->class = $class;
+        $this->repository = $this->dm->getRepository($class);
     }
 
     public function getClass()
@@ -46,36 +48,36 @@ class StatusManager {
     
     public function findAllStatuses()
     {
-        return $this->getRepository()->findAll();    
+        return $this->repository->findAll();    
     }
 
     public function findAll()
     {
-        return $this->getRepository()->findAll();    
+        return $this->repository->findAll();    
     }
 
     public function findStatusesBy($criteria)
     {
-        return $this->getRepository()->findBy($criteria);
+        return $this->repository->findBy($criteria);
     }
 
     public function findOneBy($criteria)
     {
-        return $this->getRepository()->findOneBy($criteria);
+        return $this->repository->findOneBy($criteria);
     }
 
     public function findStatusById($id)
     {
-        return $this->getRepository()->findOneById($id);
+        return $this->repository->findOneById($id);
     }
 
     public function findByCountedAsRunning($counted)
     {
-        return $this->getRepository()->findBy(array('countedAsRunning' => $counted));
+        return $this->repository->findBy(array('countedAsRunning' => $counted));
     }
 
-    private function getRepository()
+    public function getRepository()
     {
-        return $this->dm->getRepository("MDBAssetBundle:Status");
+        return $this->repository;
     }
 }

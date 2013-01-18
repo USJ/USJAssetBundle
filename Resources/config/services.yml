@@ -1,10 +1,4 @@
 services:
-    mdb_asset.type.asset_parent:
-        class: MDB\AssetBundle\Form\Type\AssetParentType
-        arguments: ["@doctrine.odm.mongodb.document_manager"]
-        tags:
-            - { name: form.type, alias: mdb_asset_asset_parent }
-
     mdb_asset.manager.asset:
         class: MDB\AssetBundle\Document\AssetManager
         arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", "MDB\AssetBundle\Document\Asset" ]
@@ -32,4 +26,4 @@ services:
 
     mdb_asset.form_factory.asset:
         class: MDB\AssetBundle\Form\Factory\FormFactory
-        arguments: [@form.factory, 'mdb_asset_asset', @mdb_asset.form_type.asset]
+        arguments: [@form.factory, %mdb_asset.form.asset.name%, %mdb_asset.form.asset.type%]

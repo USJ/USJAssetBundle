@@ -11,11 +11,13 @@ class RunningTimeSubscriber implements EventSubscriber{
 
     protected $dm;
     protected $statusManager;
+
     public function __construct($dm, $statusManager)
     {
         $this->dm = $dm;
         $this->statusManager = $statusManager;
     }
+
 	public function getSubscribedEvents()
 	{
 		return array('preUpdate' => 'onPreUpdate');
@@ -27,7 +29,7 @@ class RunningTimeSubscriber implements EventSubscriber{
 		if($document instanceof Asset){
             // doesn't work when asset create
 			//RUNNING status means status that count
-			if($eventArgs->hasChangedField('status') && $this->isRunningTime($eventArgs->getOldValue('status')) ){
+			if($eventArgs->hasChangedField('status') && $eventArgs->getOldValue('status')->isCountedAsRunning() ){
 
 				$lastChangedTime = $document->getStatusChangedAt();
 				$duration = time() - $lastChangedTime;
@@ -38,17 +40,7 @@ class RunningTimeSubscriber implements EventSubscriber{
 		  //       $class = $dm->getClassMetadata('MDB\AssetBundle\Document\Asset');
 		  //       $dm->getUnitOfWork()->recomputeSingleDocumentChangeSet($class, $document);
 			}
-            // if($dm->getUnitOfWork() > 0) {
-            //     $dm->persist($document);
-            //     $dm->flush();
-            // }
 		}
-	}
-
-	private function isRunningTime($status)
-	{
-        $status = $this->container->get('mdb_asset_status_manager')->findOneById($status);
-		return $status->getCountedAsRunning();
 	}
 
 }

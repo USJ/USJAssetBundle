@@ -8,11 +8,6 @@ use Symfony\Component\Form\AbstractType,
     Symfony\Component\OptionsResolver\OptionsResolverInterface,
     Symfony\Component\Form\FormView;
 
-use MDB\AssetBundle\Form\DataTransformer\IdToStatusTransformer;
-use MDB\AssetBundle\Form\DataTransformer\IdToAssetTransformer;
-use MDB\AssetBundle\Form\Type\AssetPropertyType;
-
-
 class AssetType extends AbstractType
 {
     protected $assetClass;

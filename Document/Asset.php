@@ -33,7 +33,9 @@ class Asset {
      */ 
     protected $status;
 
-    /** @MongoDB\Field(type="int") */
+    /** 
+     * @MongoDB\Field(type="int")
+     */
     protected $runningTime;
 
     /**
@@ -359,29 +361,6 @@ class Asset {
     public function getStatus()
     {
         return $this->status;
-    }
-
-
-    /**
-     * Set images
-     *
-     * @param collection $images
-     * @return Asset
-     */
-    public function setImages($images)
-    {
-        $this->images = $images;
-        return $this;
-    }
-
-    /**
-     * Get images
-     *
-     * @return collection $images
-     */
-    public function getImages()
-    {
-        return $this->images;
     }
 
     /**

@@ -13,7 +13,6 @@ class ParentChangeListener {
         if ($document instanceof Asset) {
             if($args->hasChangedField('parent')) {
                 $dm = $args->getDocumentManager();
-                // create new action
                 $action = new Action();
                 $action->setType("move");
                 $properties['from_parent'] = $args->getOldValue('parent');
