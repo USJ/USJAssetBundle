@@ -24,6 +24,17 @@ services:
         tags:
             - { name: form.type, alias: mdb_asset_asset }
 
+    mdb_asset.form_type.status:
+        class: MDB\AssetBundle\Form\Type\StatusType
+        arguments: ["MDB\AssetBundle\Document\Status"]
+        tags:
+            - { name: form.type, alias: mdb_asset_status }
+
     mdb_asset.form_factory.asset:
         class: MDB\AssetBundle\Form\Factory\FormFactory
         arguments: [@form.factory, %mdb_asset.form.asset.name%, %mdb_asset.form.asset.type%]
+
+    mdb_asset.form_factory.status:
+        class: MDB\AssetBundle\Form\Factory\FormFactory
+        arguments: [@form.factory, %mdb_asset.form.status.name%, %mdb_asset.form.status.type%]
+

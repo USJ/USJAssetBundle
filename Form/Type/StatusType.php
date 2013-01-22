@@ -11,6 +11,14 @@ use Symfony\Component\Form\AbstractType,
 
 class StatusType extends AbstractType
 {
+
+    protected $statusClass;
+
+    public function __construct($statusClass)
+    {
+        $this->statusClass = $statusClass;
+    }
+
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('name', 'text');
@@ -34,12 +42,12 @@ class StatusType extends AbstractType
 	public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
     	$resolver->setDefaults(array(
-    		'data_class' => 'MDB\AssetBundle\Document\Status'
+    		'data_class' => $this->statusClass
 		));
     }
 
     public function getName()
     {
-    	return 'status';
+    	return 'mdb_asset_status';
     }
 }

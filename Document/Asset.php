@@ -5,11 +5,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Cloudruge\UserBundle\Filter\OrganizationAware;
 /**
  * @MongoDB\Document(repositoryClass="MDB\AssetBundle\Repository\AssetRepository")
  * @Gedmo\Tree(type="materializedPath", activateLocking=true)
  */
-class Asset {
+class Asset implements OrganizationAware{ 
+
+    /** 
+     * @MongoDB\String
+     */
+    protected $organizationCode;
 
 	/** 
      * @MongoDB\Id
@@ -110,6 +116,16 @@ class Asset {
      */
     protected $category;
 
+    public function getOrganizationCode()
+    {
+        return $this->organizationCode;
+    }
+
+    public function setOrganizationCode($organizationCode)
+    {
+        $this->organizationCode = $organizationCode;
+        return $this;
+    }
     /**
      * Get id
      *

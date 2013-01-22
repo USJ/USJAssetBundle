@@ -29,5 +29,9 @@ class MDBAssetExtension extends Extension
 
         $container->setParameter('mdb_asset.form.asset.type', $config['asset']['form']['type']);
         $container->setParameter('mdb_asset.form.asset.name', $config['asset']['form']['name']);
+
+        $container->setParameter('mdb_asset.form.status.type', $config['status']['form']['type']);
+        $container->setParameter('mdb_asset.form.status.name', $config['status']['form']['name']);
+
     }
 }

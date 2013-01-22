@@ -14,5 +14,6 @@ class AssetProvider implements ProviderInterface
             $loggerClosure('Indexing assets');
         }
 
+        
     }
 }

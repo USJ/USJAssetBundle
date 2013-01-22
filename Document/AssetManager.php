@@ -30,7 +30,7 @@ class AssetManager extends BaseAssetManager
 
 		$this->class = $class;
 		$this->dm = $dm;
-
+        
 		$this->repository = $this->dm->getRepository($this->class);
 	}
 
