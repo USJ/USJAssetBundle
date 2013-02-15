@@ -1,0 +1,6 @@
+services:
+    mdb_asset.event_listener.log_asset:
+        class: MDB\AssetBundle\EventListener\ParentChangeListener
+        arguments: [%mdb_asset.model.parent_log.class%]
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: preUpdate}

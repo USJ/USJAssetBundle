@@ -1,3 +1,70 @@
 asset:
+    fields:
+        location: Location
+        status: Status
+        category: Category 
+        createdBy: Created By
+        createdAt: Creation date 
+
     index:
+        assets: Assets
+        actions: Actions
+        add: New Asset
+        report: Reports
+        export: Download
+        column:
+            name: Name
+            status: Status
+            description: description
+            category: Category
+            location: Location
+        search:
+            placeholder: search...
+            submit: Search 
+    show:
+        add: Add Component
+        delete: Delete 
+        delete_confirm: Are you sure you want to delete this asset?
+        edit: Edit
+        clone: Clone
+        add_document: Add Document
+        add_workorder: New Workorder
+        properties: Properties
+        documents: Documents
+        assets: Assets 
+        workorders: Work Orders
+        sensors: sensors
+        logs: Logs 
+        info: Information
+    property:
+        title_add: Add a new Property
+        key_placeholder: Name
+        value_placeholder: Value 
+
+    new:
+        title: New Asset
+    edit:
+        title: Modify Asset
+    form:
         add: Add
+        save: Save
+        cancel: Cancel 
+        delete: Delete
+        parent:
+            placeholder: Parent
+    doc:
+        title:
+            placeholder: Title 
+        description:
+            placeholder: Description 
+        add: Add a document
+        upload: Upload 
+        search: Search
+        add_submit: Submit 
+        search_input: search a document 
+
+    status:
+        ACTIVE: ACTIVE
+        SPARE: SPARE
+        CALIBRATION: CALIBRATION
+        REPAIR: REPAIR

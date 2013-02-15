@@ -1,0 +1,6 @@
+services:
+    mdb_asset.search.asset_provider:
+        class: %mdb_asset.search.asset_provider.class%
+        arguments: ["@foq_elastica.index.mdb_asset.asset", %mdb_asset.model.asset.class%,  "@doctrine_mongodb" ]
+        tags:
+            - { name: foq_elastica.provider , index: mdb_asset, type: asset}

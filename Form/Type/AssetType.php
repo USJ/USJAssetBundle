@@ -11,7 +11,7 @@ use Symfony\Component\Form\AbstractType,
 class AssetType extends AbstractType
 {
     protected $assetClass;
-
+    
     public function __construct($assetClass)
     {
         $this->assetClass = $assetClass;
@@ -20,7 +20,6 @@ class AssetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name','text', array(
-            'help_block'=> 'can contain space',
             'label' => '',
             'attr' => array('placeholder' => 'Title')
         ));
@@ -39,11 +38,10 @@ class AssetType extends AbstractType
             'empty_value' => 'Choose category'
         ));
 
-        $builder->add('status', 'document', array(
-            'class' => 'MDB\AssetBundle\Document\Status',
-            'empty_value' => 'Choose status',
-            'property' => 'name'
-        ));
+        $builder->add('status', 'choice', array(
+                'choices' => array()
+            )
+        );
 
         $builder->add('parent', 'document', array(
             'class' => $this->assetClass,

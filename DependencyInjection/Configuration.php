@@ -32,12 +32,26 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('status')->addDefaultsIfNotSet()
+                ->arrayNode('class')->isRequired()
                     ->children()
-                        ->arrayNode('form')->addDefaultsIfNotSet()
+                        ->arrayNode('model')->isRequired()
                             ->children()
-                                ->scalarNode('type')->defaultValue('mdb_asset_status')->end()
-                                ->scalarNode('name')->defaultValue('mdb_asset_status')->end()
+                                ->scalarNode('asset')->isRequired()->end()
+                                ->scalarNode('parent_log')->isRequired()->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('search_provider')->isRequired()
+                            ->children()
+                                ->scalarNode('asset')->defaultValue('MDB\AssetBundle\Search\AssetProvider')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('service')->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('manager')->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('asset')->cannotBeEmpty()->defaultValue('mdb_asset.manager.asset.default')->end()
                             ->end()
                         ->end()
                     ->end()
@@ -47,5 +61,4 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
-
-}   
+}

@@ -67,7 +67,7 @@ class AssetManager extends BaseAssetManager
 
     public function findAssetById($id)
     {
-        return $this->repository->findOneBy(array('id'=> $id));
+        return $this->repository->findOneById($id);
     }
     
     /**
@@ -126,25 +126,19 @@ class AssetManager extends BaseAssetManager
     {
         return $this
             ->getManager()
-            ->getRepository("MDBAssetBundle:Asset")->findAll();
+            ->getRepository($this->class)->findAll();
     }
 
     private function getManager()
     {
         return $this->dm;
     }
-    
-
-    public function findOneById($id)
-    {
-        return $this->getManager()
-            ->getRepository("MDBAssetBundle:Asset")->findOneById($id);
-    }
 
     public function getRepository()
     {
         return $this->repository;
     }
+    
 	public function getAssetRepository()
 	{
 		return $this->repository;
@@ -178,6 +172,11 @@ class AssetManager extends BaseAssetManager
     {
         $this->dm->persist($asset);
         $this->dm->flush();
+    }
+
+    public function isNewAsset($asset)
+    {
+        return !$this->dm->getUnitOfWork()->isInIdentityMap($asset);
     }
 
 }

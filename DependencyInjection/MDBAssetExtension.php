@@ -26,12 +26,17 @@ class MDBAssetExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('search.yml');
+        $loader->load('listeners.yml');
 
         $container->setParameter('mdb_asset.form.asset.type', $config['asset']['form']['type']);
         $container->setParameter('mdb_asset.form.asset.name', $config['asset']['form']['name']);
 
-        $container->setParameter('mdb_asset.form.status.type', $config['status']['form']['type']);
-        $container->setParameter('mdb_asset.form.status.name', $config['status']['form']['name']);
+        $container->setParameter('mdb_asset.model.asset.class', $config['class']['model']['asset']);
+        $container->setParameter('mdb_asset.model.parent_log.class', $config['class']['model']['parent_log']);
 
+        $container->setParameter('mdb_asset.search.asset_provider.class', $config['class']['search_provider']['asset']);
+
+        $container->setAlias('mdb_asset.manager.asset', $config['service']['manager']['asset']);
     }
 }

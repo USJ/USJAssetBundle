@@ -13,4 +13,24 @@ use Gedmo\Tree\Document\MongoDB\Repository\MaterializedPathRepository;
  */
 class AssetRepository extends MaterializedPathRepository
 {
+    public function findByIds($array)
+    {
+        return $this->createQueryBuilder('MDB\AssetBundle\Document\Asset')
+            ->field('id')->in($array)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function countAssetsByOrganization($organizationCode)
+    {
+        $results = $this->createQueryBuilder()
+            ->group(array(), array('count' => 0))
+            ->reduce('function (obj, prev) { prev.count++; }')
+            ->field('organizationCode')->equals($organizationCode)
+            ->getQuery()
+            ->execute();
+
+        return (int) $results['count'];
+    }
+
 }

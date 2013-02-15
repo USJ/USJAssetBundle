@@ -7,7 +7,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @MongoDB\EmbeddedDocument
+ * @MongoDB\MappedSuperclass
  */
 class Action 
 {
@@ -30,12 +30,6 @@ class Action
      * @MongoDB\Hash 
      */
     protected $properties = array();
-
-    /**
-     * @MongoDB\String
-     */
-    protected $message;
-
 
     /**
      * Get id
@@ -116,27 +110,5 @@ class Action
     public function getProperties()
     {
         return $this->properties;
-    }
-
-    /**
-     * Set message
-     *
-     * @param string $message
-     * @return \Action
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-        return $this;
-    }
-
-    /**
-     * Get message
-     *
-     * @return string $message
-     */
-    public function getMessage()
-    {
-        return $this->message;
     }
 }

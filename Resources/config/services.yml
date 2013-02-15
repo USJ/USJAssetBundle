@@ -1,40 +1,27 @@
 services:
-    mdb_asset.manager.asset:
+    mdb_asset.manager.asset.default:
         class: MDB\AssetBundle\Document\AssetManager
-        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", "MDB\AssetBundle\Document\Asset" ]
+        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.asset.class% ]
 
-    mdb_asset.manager.status:
-        class: MDB\AssetBundle\Document\StatusManager
-        arguments: ["@doctrine.odm.mongodb.document_manager",  "MDB\AssetBundle\Document\Status"]
-
-    mdb_asset.event_listener.parent_change:
-        class: MDB\AssetBundle\EventListener\ParentChangeListener
-        tags:
-            - { name: doctrine_mongodb.odm.event_listener, event: preUpdate }
-
-    mdb_asset.event_listener.running_time:
-        class: MDB\AssetBundle\EventListener\RunningTimeSubscriber
-        arguments: ["@doctrine.odm.mongodb.document_manager","@mdb_asset.manager.status" ]
-        tags:
-            - { name: doctrine.odm.mongodb.event_subscriber, connection: default }
-
+    # Form Type
     mdb_asset.form_type.asset:
         class: MDB\AssetBundle\Form\Type\AssetType
-        arguments: ["MDB\AssetBundle\Document\Asset"]
+        arguments: [%mdb_asset.model.asset.class%]
         tags:
             - { name: form.type, alias: mdb_asset_asset }
 
-    mdb_asset.form_type.status:
-        class: MDB\AssetBundle\Form\Type\StatusType
-        arguments: ["MDB\AssetBundle\Document\Status"]
+    mdb_asset.form_type.asset_property:
+        class: MDB\AssetBundle\Form\Type\AssetPropertyType
         tags:
-            - { name: form.type, alias: mdb_asset_status }
+            - { name: form.type, alias: mdb_asset_asset_property }
 
+    # Form factory
     mdb_asset.form_factory.asset:
         class: MDB\AssetBundle\Form\Factory\FormFactory
         arguments: [@form.factory, %mdb_asset.form.asset.name%, %mdb_asset.form.asset.type%]
 
-    mdb_asset.form_factory.status:
+    mdb_asset.form_factory.asset_property:
         class: MDB\AssetBundle\Form\Factory\FormFactory
-        arguments: [@form.factory, %mdb_asset.form.status.name%, %mdb_asset.form.status.type%]
+        arguments: [@form.factory, "mdb_asset_asset_property", "mdb_asset_asset_property"]
+
 

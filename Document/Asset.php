@@ -1,140 +1,71 @@
 <?php
 namespace MDB\AssetBundle\Document;
- 
+
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Cloudruge\UserBundle\Filter\OrganizationAware;
 /**
- * @MongoDB\Document(repositoryClass="MDB\AssetBundle\Repository\AssetRepository")
- * @Gedmo\Tree(type="materializedPath", activateLocking=true)
+ * @MongoDB\MappedSuperclass
  */
-class Asset implements OrganizationAware{ 
-
-    /** 
-     * @MongoDB\String
-     */
-    protected $organizationCode;
-
-	/** 
-     * @MongoDB\Id
- 	 */
-	protected $id;
-
-    /** 
+abstract class Asset
+{
+    /**
      * @MongoDB\Hash
      */
     protected $properties;
 
-    /** 
-     * Just of warranty and acquisition, etc.
-     * 
-     * @MongoDB\Hash
-     */
-    protected $ownershipInfo;
-    
-    /** 
-     * @MongoDB\ReferenceOne(targetDocument="Status", simple=true)
-     */ 
-    protected $status;
-
-    /** 
-     * @MongoDB\Field(type="int")
-     */
-    protected $runningTime;
-
     /**
      * @MongoDB\Field(type="timestamp")
-     * @Gedmo\Timestampable(on="change",field="status")
-     */
-    protected $statusChangedAt;
-
-    /**
-     * @MongoDB\Field(type="timestamp")
-     * @Gedmo\Timestampable(on="create")
      */
     protected $createdAt;
 
     /**
      * @MongoDB\Field(type="timestamp")
-     * @Gedmo\Timestampable(on="update")
      */
     protected $updatedAt;
 
-	/**
+    /**
      * @MongoDB\Field(type="string")
-     * @Gedmo\Versioned
      */
-	protected $name;
+    protected $name;
 
-	/**
+    /**
      * @MongoDB\Field(type="string")
-     * @Gedmo\Versioned
      */
-	protected $description;
+    protected $description;
 
-	/**
+    /**
      * @MongoDB\Field(type="string")
-     * @Gedmo\TreePathSource
-     * @Gedmo\Versioned
      */
     protected $referenceId;
 
     /**
      * @MongoDB\Field(type="string")
-     * @Gedmo\TreePath(separator="|")
      */
     protected $path;
 
     /**
-     * @Gedmo\TreeParent
      * @MongoDB\ReferenceOne(targetDocument="Asset")
-     * @Gedmo\Versioned
      */
     protected $parent;
 
     /**
-     * @Gedmo\TreeLevel
      * @MongoDB\Field(type="int")
      */
     protected $level;
 
     /**
-     * @Gedmo\TreeLockTime
      * @MongoDB\Field(type="date")
      */
     protected $lockTime;
-
-    /**
-     * @MongoDB\EmbedMany(targetDocument="Action")
-     */
-    protected $actions =  array();
 
     /**
      * @MongoDB\String
      */
     protected $category;
 
-    public function getOrganizationCode()
-    {
-        return $this->organizationCode;
-    }
-
-    public function setOrganizationCode($organizationCode)
-    {
-        $this->organizationCode = $organizationCode;
-        return $this;
-    }
-    /**
-     * Get id
-     *
-     * @return id $id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    protected $logs;
 
     /**
      * Set createdAt
@@ -178,6 +109,50 @@ class Asset implements OrganizationAware{
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     * @return \Comment
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return string $createdBy
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param string $updatedBy
+     * @return \Comment
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return string $updatedBy
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
     }
 
     /**
@@ -313,57 +288,12 @@ class Asset implements OrganizationAware{
     }
 
     /**
-     * Set runningTime
-     *
-     * @param int $runningTime
-     * @return Asset
-     */
-    public function setRunningTime($runningTime)
-    {
-        $this->runningTime = $runningTime;
-        return $this;
-    }
-
-    /**
-     * Get runningTime
-     *
-     * @return int $runningTime
-     */
-    public function getRunningTime()
-    {
-        return $this->runningTime;
-    }
-
-    /**
-     * Set statusChangedAt
-     *
-     * @param timestamp $statusChangedAt
-     * @return Asset
-     */
-    public function setStatusChangedAt($statusChangedAt)
-    {
-        $this->statusChangedAt = $statusChangedAt;
-        return $this;
-    }
-
-    /**
-     * Get statusChangedAt
-     *
-     * @return timestamp $statusChangedAt
-     */
-    public function getStatusChangedAt()
-    {
-        return $this->statusChangedAt;
-    }
-
-
-    /**
      * Set status
      *
      * @param MDB\AssetBundle\Document\Status $status
      * @return Asset
      */
-    public function setStatus(\MDB\AssetBundle\Document\Status $status)
+    public function setStatus($status)
     {
         $this->status = $status;
         return $this;
@@ -379,14 +309,13 @@ class Asset implements OrganizationAware{
         return $this->status;
     }
 
+
     /**
-     * Add actions
-     *
-     * @param MDB\AssetBundle\Document\Action $actions
+     * add new actions peformed to this asset
      */
-    public function addActions(\MDB\AssetBundle\Document\Action $actions)
+    public function addAction(\MDB\AssetBundle\Document\Action $action)
     {
-        $this->actions[] = $actions;
+        $this->actions[] = $action;
     }
 
     /**
@@ -420,11 +349,8 @@ class Asset implements OrganizationAware{
     {
         return $this->category;
     }
-    public function __construct()
-    {
-        $this->actions = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
+
+
     /**
      * Set properties
      *
@@ -436,9 +362,29 @@ class Asset implements OrganizationAware{
         $this->properties = $properties;
         return $this;
     }
+
+    public function setProperty($propertyId, $name = null, $value = null)
+    {
+        $result = array();
+        foreach($this->properties as $property) {
+            if($property['id'] == $propertyId ) {
+                if(!is_null($name)) {
+                    $property['name'] = $name;
+                }
+                if(!is_null($value)){
+                    $property['value'] = $value;
+                }
+            }
+            $result[] = $property;
+        }
+        $this->properties = $result;
+        return $this;
+    }
+
     public function addProperty($name, $value)
     {
         $this->properties[] = array(
+            'id' => uniqid(),
             'name' => $name,
             'value' => $value
             );
@@ -447,7 +393,7 @@ class Asset implements OrganizationAware{
 
     /**
      * delete properties in specific index.
-     * 
+     *
      * @param int $index
      * @return \Asset
      */
@@ -457,22 +403,20 @@ class Asset implements OrganizationAware{
         return $this;
     }
 
-    public function deleteProperty($name, $value)
+    public function deleteProperty($id)
     {
-        // $found = false;
-        // for($i = 0; $i < count($this->properties) ; $i++) {
-        //     var_dump($this->properties);die;
-        //     $property = $this->properties[$i];
-        //     if($property['name'] == $name && $property['value'] == $value) {
-        //         $found = true;
-        //         break;
-        //     }
-        // }
-        // if($found) unset($this->properties[$i]);
-        $needle = array('name' => $name, 'value' => $value);
-        $key = array_search($needle, $this->properties);
+        $key = array_search($this->getProperty($id), $this->properties);
         unset($this->properties[$key]);
         return $this;
+    }
+
+    public function getProperty($id)
+    {
+        foreach($this->properties as $property) {
+            if($property['id'] == $id) {
+                return $property;
+            }
+        }
     }
     /**
      * Get properties
@@ -489,32 +433,6 @@ class Asset implements OrganizationAware{
         return get_class($this);
     }
 
-    public function getAcquisitionDate()
-    {
-        return $ownershipInfo['acquisition_date'];
-    }
-
-    /**
-     * Set ownershipInfo
-     *
-     * @param hash $ownershipInfo
-     * @return \Asset
-     */
-    public function setOwnershipInfo($ownershipInfo)
-    {
-        $this->ownershipInfo = $ownershipInfo;
-        return $this;
-    }
-
-    /**
-     * Get ownershipInfo
-     *
-     * @return hash $ownershipInfo
-     */
-    public function getOwnershipInfo()
-    {
-        return $this->ownershipInfo;
-    }
 
     /**
      * Set referenceId
@@ -536,5 +454,23 @@ class Asset implements OrganizationAware{
     public function getReferenceId()
     {
         return $this->referenceId;
+    }
+
+    public function getPathIds()
+    {
+        $results = array();
+        $ids = explode("|", $this->path);
+        for ($i=0; $i < count($ids) - 1 ; $i++) {
+            if($ids[$i] == '') {
+                continue;
+            }
+            $results[] = substr($ids[$i], -24);
+        }
+        return $results;
+    }
+
+    public function getLogs()
+    {
+        return $this->logs;
     }
 }

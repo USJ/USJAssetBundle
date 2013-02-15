@@ -1,0 +1,10 @@
+{% if logs|length < 1 %}
+    <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ 'asset.logs.message.empty'|trans({},'CloudrugeAssetBundle') }}
+    </div>
+{% else %}
+    {% for log in logs %}
+        {{ 'asset.logs.message.change_parent' |trans({'%from_parent%': log.from.name, '%to_parent%': log.to.name }, 'CloudrugeAssetBundle')|raw }}
+    {% endfor %}
+{% endif %}
