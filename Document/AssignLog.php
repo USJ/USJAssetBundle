@@ -5,6 +5,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 /**
 * @MongoDB\MappedSuperclass
 */
-abstract class ParentLog extends GenericChangeLog
+abstract class AssignLog extends GenericChangeLog
 {
+
 }

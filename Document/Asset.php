@@ -4,6 +4,7 @@ namespace MDB\AssetBundle\Document;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
+use MDB\AssetBundle\Validator\Constraints\UniqueAssetCode;
 
 /**
  * @MongoDB\MappedSuperclass
@@ -65,7 +66,36 @@ abstract class Asset
      */
     protected $category;
 
+    /**
+     * @MongoDB\Collection
+     */
+    protected $assignees = array();
+
+    /**
+     * @MongoDB\Collection
+     */
+    protected $tags = array();
+
+    /**
+     * @MongoDB\String
+     * @UniqueAssetCode
+     */
+    protected $code;
+
+
     protected $logs;
+
+
+    public function setCode($code)
+    {
+        $this->code = $code;
+        return $this;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
 
     /**
      * Set createdAt
@@ -227,7 +257,7 @@ abstract class Asset
      * @param MDB\AssetBundle\Document\Asset $parent
      * @return Asset
      */
-    public function setParent(\MDB\AssetBundle\Document\Asset $parent)
+    public function setParent(\MDB\AssetBundle\Document\Asset $parent = null)
     {
         $this->parent = $parent;
         return $this;
@@ -472,5 +502,34 @@ abstract class Asset
     public function getLogs()
     {
         return $this->logs;
+    }
+
+    public function getAssignes()
+    {
+        return $this->assignees;
+    }
+    public function addAssignee($assignee)
+    {
+        $this->assignees[] = $assignee;
+    }
+
+    public function setAssignees($assignees)
+    {
+        $this->assignees = $assignees;
+    }
+
+    public function setAssignee($assignee)
+    {
+        $this->assignees = array($assignee);
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function setTags($tags)
+    {
+        return $this->tags = $tags;
     }
 }

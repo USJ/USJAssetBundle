@@ -1,6 +1,24 @@
 services:
-    mdb_asset.event_listener.log_asset:
+    mdb_asset.event_listener.parent_change:
         class: MDB\AssetBundle\EventListener\ParentChangeListener
         arguments: [%mdb_asset.model.parent_log.class%]
         tags:
             - { name: doctrine_mongodb.odm.event_listener, event: preUpdate}
+
+    mdb_asset.event_listener.properties_change:
+        class: MDB\AssetBundle\EventListener\PropertiesChangeListener
+        arguments: [%mdb_asset.model.properties_log.class%]
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: preUpdate}
+
+    mdb_asset.event_listener.status_change:
+        class: MDB\AssetBundle\EventListener\StatusChangeListener
+        arguments: [%mdb_asset.model.status_log.class%]
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: preUpdate}
+
+    mdb_asset.event_listener.add_document:
+        class: MDB\AssetBundle\EventListener\DocumentChangeSubscriber
+        arguments: [@mdb_asset.manager.asset, %mdb_asset.model.document_log.class%]
+        tags:
+            - { name: kernel.event_subscriber }

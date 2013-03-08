@@ -5,45 +5,18 @@ use MDB\AssetBundle\Document\AssetManager;
 use MDB\AssetBundle\Document\Asset;
 
 
-class AssetManagerTest extends \PHPUnit_Framework_TestCase
+class AssetManagerTest extends BaseAssetTreeTest
 {
-	private $assetMangaer;
-	private $dm;
-	private $repository;
+    public function testCloneAssetTree()
+    {
+        $am = new AssetManager($this->dispatcher, $this->dm, null);
+        $newAssets = $am->cloneAssetHierachy($this->assets[0]);
 
-	const ASSETTYPE = "MDB\AssetBundle\Tests\Document\DummyAsset";
+        $expectedAssets = array();
+        foreach ($this->assets as $newAsset) {
+            $expectedAssets[] = $newAsset;
+        }
+        $this->assertEquals($expectedAssets, $newAssets);
 
-	public function setUp()
-	{
-		$this->assetManager = $this->getAssetManagerMock();
-	}
-
-	public function testFindAssetBy()
-	{
-		$crit = array("name" => "Asset Name");
-		$this->assetManager->expects($this->once())
-			 ->method('findAssetBy')
-			 ->with($this->equalTo(array('name' => 'Asset Name')));
-
-        $this->assetManager->findAssetBy($crit);
-	}
-
-	public function testFindAssets()
-	{
-		# code...
-	}
-
-	protected function getAssetManagerMock()
-	{
-		return $this->getMockBuilder('MDB\AssetBundle\Document\AssetManager')
-            ->disableOriginalConstructor()
-            //set of method that mockup will do.
-            ->setMethods(array('findAssetBy'))
-            ->getMock();
-	}
-
-}
-class DummyAsset extends \MDB\AssetBundle\Document\Asset
-{
-
+    }
 }

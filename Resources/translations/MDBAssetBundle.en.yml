@@ -21,6 +21,11 @@ asset:
         search:
             placeholder: search...
             submit: Search 
+    filters:
+        all: All 
+        status: Status
+        location: Location
+        category: Category 
     show:
         add: Add Component
         delete: Delete 
@@ -62,9 +67,22 @@ asset:
         search: Search
         add_submit: Submit 
         search_input: search a document 
-
+    log:
+        parent_change: moved from "<em><a href="%url_from%">%from%</a></em>" to <strong><a href="%url_to%">%to%</a></strong>
+        parent_change_from_root: asset moved to <strong><a href="%url_to%">%to%</a></strong>
+        parent_change_to_root: asset moved from <strong><a href="%url_from%">%from%</a></strong>
+        property_add: property <span class="label">%to_key%</span> added with value "%to_value%"
+        property_remove: property <span class="label">%from_key%</span> ("%from_value%") removed
+        property_change: property <span class="label">%from_key%</span> changed (from "%from_value%" to "%to_value%")
+        status_change: status changed to <span class="label">%to%</span> (originally %from%)
     status:
         ACTIVE: ACTIVE
         SPARE: SPARE
         CALIBRATION: CALIBRATION
         REPAIR: REPAIR
+    delete:
+        confirm:
+            title: Please confirm the deletion of this asset 
+            text: There are workorders related to the asset <span class="label">%asset_name%</span>
+            only_asset: Delete only the asset 
+            with_wos: Delete the asset and ALL related Work Orders 

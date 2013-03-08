@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace MDB\AssetBundle\Model;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -16,7 +16,7 @@ abstract class AssetManager
         $this->dispatcher = $dispatcher;
     }
 
-    public function saveAsset($asset) 
+    public function saveAsset($asset)
     {
         $event = new AssetEvent($asset);
         $this->dispatcher->dispatch(Events::ASSET_PRE_PERSIST, $event);
@@ -51,5 +51,12 @@ abstract class AssetManager
     {
         return $this->repository;
     }
+
+    public function setRepository($repository)
+    {
+        $this->repository = $repository;
+        return $this;
+    }
+
     abstract protected function doSaveAsset($asset);
 }
