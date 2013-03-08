@@ -17,6 +17,6 @@
         "knplabs/knp-paginator-bundle": "dev-master"
     },
     "autoload": {
-        "psr-0": { "MDB\\AssetBundle": "" }
+        "psr-0": { "MDB\\AssetBundle\\": "" }
     }
 }
