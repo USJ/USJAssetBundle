@@ -44,7 +44,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('document_log')->isRequired()->end()
                             ->end()
                         ->end()
-                        ->arrayNode('search_provider')->isRequired()
+                        ->arrayNode('search_provider')->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('asset')->defaultValue('MDB\AssetBundle\Search\AssetProvider')->end()
                             ->end()

@@ -25,3 +25,6 @@ services:
         arguments: [@form.factory, "mdb_asset_asset_property", "mdb_asset_asset_property"]
 
 
+    mdb_asset.importer.asset:
+        class: MDB\AssetBundle\Importer\AssetImporter
+        arguments: [@doctrine.odm.mongodb.document_manager]

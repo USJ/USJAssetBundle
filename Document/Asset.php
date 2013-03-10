@@ -504,7 +504,7 @@ abstract class Asset
         return $this->logs;
     }
 
-    public function getAssignes()
+    public function getAssignees()
     {
         return $this->assignees;
     }
@@ -520,7 +520,12 @@ abstract class Asset
 
     public function setAssignee($assignee)
     {
-        $this->assignees = array($assignee);
+        $this->assignees[0] = $assignee;
+    }
+
+    public function getAssignee()
+    {
+        return $this->assignees[0];
     }
 
     public function getTags()
