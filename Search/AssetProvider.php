@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace MDB\AssetBundle\Search;
 
@@ -57,31 +57,33 @@ class AssetProvider implements ProviderInterface
         $objects = array();
 
         foreach($assets as $asset) {
-
-            $document = new Elastica_Document(
-                $asset->getId(),
-                array(
-                    "name" => $asset->getName(),
-                    "description" => $asset->getDescription(),
-                    "category" => $asset->getCategory()
-                ),
-                "asset",
-                "mdb_asset"
-             );
-
-            if($asset->getProperties()) {
-                $flattened = '';
-                foreach ($asset->getProperties() as $property) {
-                    $document->add($property['name'], $property['value']);
-                    $flattened .= sprintf("%s : %s", $property['name'], $property['value']);
-                }
-                $document->add("properties", $flattened);
-            }
-
-
-            $objects[] = $document;
+            $objects[] = $this->buildDocument($asset);
        }
        return $objects;
+    }
+
+    protected function buildDocument($asset)
+    {
+        $document = new Elastica_Document(
+            $asset->getId(),
+            array(
+                "name" => $asset->getName(),
+                "description" => $asset->getDescription(),
+                "category" => $asset->getCategory()
+            ),
+            "asset",
+            "mdb_asset"
+         );
+
+        if($asset->getProperties()) {
+            $flattened = '';
+            foreach ($asset->getProperties() as $property) {
+                $document->add($property['name'], $property['value']);
+                $flattened .= sprintf("%s : %s", $property['name'], $property['value']);
+            }
+            $document->add("properties", $flattened);
+        }
+        return $document;
     }
 
     protected function createQueryBuilder()
