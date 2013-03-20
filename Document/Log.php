@@ -9,8 +9,6 @@ abstract class Log
 {
     protected $createdBy;
     protected $createdAt;
-    protected $updatedBy;
-    protected $updatedAt;
 
     /**
      * @MongoDB\String

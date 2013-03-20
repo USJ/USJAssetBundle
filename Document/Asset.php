@@ -67,9 +67,9 @@ abstract class Asset
     protected $category;
 
     /**
-     * @MongoDB\Collection
+     * @MongoDB\String
      */
-    protected $assignees = array();
+    protected $assignee;
 
     /**
      * @MongoDB\Collection
@@ -81,6 +81,17 @@ abstract class Asset
      * @UniqueAssetCode
      */
     protected $code;
+
+
+    /**
+     * @MongoDB\String
+     */
+    protected $oldId;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $oldParentId;
 
 
     protected $logs;
@@ -504,20 +515,6 @@ abstract class Asset
         return $this->logs;
     }
 
-    public function getAssignees()
-    {
-        return $this->assignees;
-    }
-    public function addAssignee($assignee)
-    {
-        $this->assignees[] = $assignee;
-    }
-
-    public function setAssignees($assignees)
-    {
-        $this->assignees = $assignees;
-    }
-
     public function setAssignee($assignee)
     {
         $this->assignees[0] = $assignee;
@@ -536,5 +533,28 @@ abstract class Asset
     public function setTags($tags)
     {
         return $this->tags = $tags;
+    }
+
+    // Methods used when doing asset cloning
+    public function getOldId()
+    {
+        return $this->oldId;
+    }
+
+    public function setOldId($oldId)
+    {
+        $this->oldId = $oldId;
+        return $this;
+    }
+
+    public function getOldParentId()
+    {
+        return $this->oldParentId;
+    }
+
+    public function setOldParentId($oldParentId)
+    {
+        $this->oldParentId = $oldParentId;
+        return $this;
     }
 }

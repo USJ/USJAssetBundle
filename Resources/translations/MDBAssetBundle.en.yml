@@ -4,7 +4,8 @@ asset:
         status: Status
         category: Category 
         createdBy: Created By
-        createdAt: Creation date 
+        createdAt: Creation date
+        code: Code 
 
     index:
         assets: Assets

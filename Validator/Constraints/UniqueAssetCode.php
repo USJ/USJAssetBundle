@@ -10,7 +10,7 @@ class UniqueAssetCode extends Constraint
 {
     public $message = 'Asset code %code% has been used';
 
-    public function validateBy()
+    public function validatedBy()
     {
         return 'mdb_asset.unique_asset_code';
     }

@@ -108,7 +108,6 @@ class AssetManager extends BaseAssetManager
     }
 
     /**
-     * This class will be remove later, use findAssets() instead
      */
     public function findAllAssets()
     {
@@ -147,9 +146,6 @@ class AssetManager extends BaseAssetManager
 
     public function cloneAssetHierachy($asset)
     {
-        $batchSize = 1;
-        // clone the children
-        // clone the make the link back
         $assets = $this->assetChildren($asset, null, 'level', 'asc', true);
         // top to bottom
         $index = 0;
@@ -176,12 +172,8 @@ class AssetManager extends BaseAssetManager
 
         // set the parent with id
         foreach ($clonedAssets as $clonedAsset) {
-            // var_dump("called first");
-            // var_dump(!is_null($clonedAsset->getParent()));
             // find out the parent and replace id with newly cloned
             if(!is_null($clonedAsset->getParent())) {
-                // var_dump($clonedAsset->getOldParentId());
-                // var_dump($topParent->getId() == $clonedAsset->getOldParentId());
                 if($topParent) {
                     if($topParent->getId() == $clonedAsset->getOldParentId()){
                         $clonedAsset->setParent($topParent);
@@ -228,32 +220,6 @@ class AssetManager extends BaseAssetManager
         $this->dm->flush();
         $this->dm->clear();
         return $collection->first();
-        // $this->saveAsset($clonedAssets);
-
-        // foreach ($clonedAssets as $clonedAsset) {
-        //     $this->saveAsset($clonedAsset);
-        // }
-
-        // var_dump(array_map(
-        //     function($ele){ return array(
-        //         'id'=>(string)$ele->getId(),
-        //         'parent_id'=>($ele->getParent())?(string)$ele->getParent()->getId():'no parent',
-        //         'level'=>$ele->getLevel());
-        //     }
-        //     ,$clonedAssets));die;
-
-        // for ($i=0; $i < count($clonedAssets); $i++) {
-        //     $asset = $clonedAssets[$i];
-        //     $this->dm->persist($asset);
-        //     if(($i % $batchSize) === 0) {
-        //         $this->dm->flush();
-        //         $this->dm->clear();
-        //     }
-        // }
-        // die;
-        // $this->dm->flush();
-        // return $newAssets;
-        // $this->container->get("mdb_asset.manager.asset")->saveAsset($newAsset);
     }
 
     /**
@@ -285,7 +251,7 @@ class AssetManager extends BaseAssetManager
         return $this->repository->getRootNodes($sortByField, $direction);
     }
 
-    public function doSaveAsset($asset)
+    protected function doSaveAsset($asset)
     {
         $this->dm->persist($asset);
         $this->dm->flush();

@@ -74,6 +74,7 @@ class AssetImporter
             $asset->setName($item['ASSET_NAME']);
             $asset->setDescription($item['ASSET_DESCRIPTION']);
             $asset->setStatus($item['STATUS']);
+            $asset->setCode('A'.str_pad($item['ROW'], 4, '0', STR_PAD_LEFT));
 
             if(!is_null($item['PROPERTIES'])) {
                 foreach ($item['PROPERTIES'] as $name => $value) {
@@ -92,9 +93,7 @@ class AssetImporter
 
         foreach ($collection as $item) {
             $item->setLevel(self::calcAssetLevel($item));
-            // $item->setPath(self::calcAssetPath($item));
         }
-        // var_dump($collection);die;
        return $collection;
     }
 
@@ -108,26 +107,6 @@ class AssetImporter
             $parent = $parent->getParent();
         }
         return $count;
-    }
-
-    public static function calcAssetPath($asset)
-    {
-        $sources = array();
-        $parent = null;
-        for ($i=0; $i < $asset->getLevel(); $i++) {
-            if($i == 0) {
-                $sources[] = $asset;
-                continue;
-            }
-            $sources[] = $sources[$i-1]->getParent();
-        }
-        $sources = array_reverse($sources);
-        $path = '';
-
-        foreach ($sources as $p => $id) {
-            $path .= '-'.$id.'|';
-        }
-        return $path;
     }
 
     public function getPreviewData()
