@@ -3,32 +3,31 @@ namespace MDB\AssetBundle\EventListener;
 
 use Doctrine\ODM\MongoDB\Event\PreUpdateEventArgs;
 use MDB\AssetBundle\Document\Asset;
-use MDB\AssetBundle\Document\AssetManager;
 
 /**
 * Subscriber which response for logging the asset logs
 */
-class ParentChangeListener
+class DeletedAtChangeListener
 {
 
-    protected $parentLogClass;
+    protected $deleteLogClass;
 
-    public function __construct($parentLogClass)
+    public function __construct($deleteLogClass)
     {
-        $this->parentLogClass = $parentLogClass;
+        $this->deleteLogClass = $deleteLogClass;
     }
 
     public function preUpdate(PreUpdateEventArgs $args)
     {
         $document = $args->getDocument();
 
-        if ($document instanceof Asset && $args->hasChangedField('parent')) {
+        if ($document instanceof Asset && $args->hasChangedField('deletedAt')) {
             $dm = $args->getDocumentManager();
-            $parentLog = new $this->parentLogClass;
-            $parentLog->change($args->getOldValue('parent'), $args->getNewValue('parent'));
+            $deleteLog = new $this->deleteLogClass;
+            $deleteLog->change($args->getOldValue('deletedAt'), $args->getNewValue('deletedAt'));
 
-            $document->addLog($parentLog);
-            $document->setPath(AssetManager::generatePath($document));
+            $document->addLog($deleteLog);
+
             // nessessary for update
             $class = $dm->getClassMetadata(get_class($document));
             $dm->getUnitOfWork()->recomputeSingleDocumentChangeSet($class, $document);

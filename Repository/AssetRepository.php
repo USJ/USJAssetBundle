@@ -21,16 +21,4 @@ class AssetRepository extends MaterializedPathRepository
             ->execute();
     }
 
-    public function countAssetsByOrganization($organizationCode)
-    {
-        $results = $this->createQueryBuilder()
-            ->group(array(), array('count' => 0))
-            ->reduce('function (obj, prev) { prev.count++; }')
-            ->field('organizationCode')->equals($organizationCode)
-            ->getQuery()
-            ->execute();
-
-        return (int) $results['count'];
-    }
-
 }

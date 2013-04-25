@@ -29,9 +29,22 @@ abstract class GenericChangeLog extends Log
 
     public function change($from, $to)
     {
-        $this->changeType = self::CHANGE;
-        $this->from = $from;
-        $this->to = $to;
+        if(is_null($from) && !is_null($to)) {
+            $this->add($to);
+            return $this;
+        }
+
+        if(!is_null($from) && is_null($to)) {
+            $this->remove($from);
+            return $this;
+        }
+
+        if(!is_null($from) && !is_null($to)) {
+            $this->changeType = self::CHANGE;
+            $this->from = $from;
+            $this->to = $to;
+            return $this;
+        }
     }
 
     public function add($to)

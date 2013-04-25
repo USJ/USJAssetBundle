@@ -42,6 +42,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('assign_log')->isRequired()->end()
                                 ->scalarNode('status_log')->isRequired()->end()
                                 ->scalarNode('document_log')->isRequired()->end()
+                                ->scalarNode('delete_log')->isRequired()->end()
                             ->end()
                         ->end()
                     ->end()

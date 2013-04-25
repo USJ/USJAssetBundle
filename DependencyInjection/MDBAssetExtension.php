@@ -39,6 +39,7 @@ class MDBAssetExtension extends Extension
         $container->setParameter('mdb_asset.model.assign_log.class', $config['class']['model']['assign_log']);
         $container->setParameter('mdb_asset.model.status_log.class', $config['class']['model']['status_log']);
         $container->setParameter('mdb_asset.model.document_log.class', $config['class']['model']['document_log']);
+        $container->setParameter('mdb_asset.model.delete_log.class', $config['class']['model']['delete_log']);
 
         // $container->setParameter('mdb_asset.search.asset_provider.class', $config['class']['search_provider']['asset']);
 

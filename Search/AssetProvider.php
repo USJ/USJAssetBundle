@@ -2,8 +2,7 @@
 
 namespace MDB\AssetBundle\Search;
 
-use FOQ\ElasticaBundle\Doctrine\AbstractProvider;
-use FOQ\ElasticaBundle\Provider\ProviderInterface;
+use FOS\ElasticaBundle\Provider\ProviderInterface;
 use Elastica_Document;
 
 class AssetProvider implements ProviderInterface
@@ -56,9 +55,10 @@ class AssetProvider implements ProviderInterface
 
         $objects = array();
 
-        foreach($assets as $asset) {
+        foreach ($assets as $asset) {
             $objects[] = $this->buildDocument($asset);
        }
+
        return $objects;
     }
 
@@ -75,7 +75,7 @@ class AssetProvider implements ProviderInterface
             "mdb_asset"
          );
 
-        if($asset->getProperties()) {
+        if ($asset->getProperties()) {
             $flattened = '';
             foreach ($asset->getProperties() as $property) {
                 $document->add($property['name'], $property['value']);
@@ -83,6 +83,7 @@ class AssetProvider implements ProviderInterface
             }
             $document->add("properties", $flattened);
         }
+
         return $document;
     }
 

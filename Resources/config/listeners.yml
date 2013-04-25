@@ -5,6 +5,12 @@ services:
         tags:
             - { name: doctrine_mongodb.odm.event_listener, event: preUpdate}
 
+    mdb_asset.event_listener.deletedAt_change:
+        class: MDB\AssetBundle\EventListener\DeletedAtChangeListener
+        arguments: [%mdb_asset.model.delete_log.class%]
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: preUpdate}
+
     mdb_asset.event_listener.properties_change:
         class: MDB\AssetBundle\EventListener\PropertiesChangeListener
         arguments: [%mdb_asset.model.properties_log.class%]

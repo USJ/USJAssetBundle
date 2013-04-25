@@ -15,6 +15,11 @@ services:
         tags:
             - { name: form.type, alias: mdb_asset_asset_property }
 
+    mdb_asset.form_type.typeahead_ajax:
+        class: MDB\AssetBundle\Form\Type\TypeaheadAjaxType
+        tags:
+            - { name: form.type, alias: typeahead_ajax }
+
     # Form factory
     mdb_asset.form_factory.asset:
         class: MDB\AssetBundle\Form\Factory\FormFactory

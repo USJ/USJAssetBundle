@@ -16,12 +16,12 @@ class AssetPropertyType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('name', 'text', array(
-            'label_render' => false,
+            // 'label_render' => false,
             'constraints' => new NotBlank()
         ));
 
 		$builder->add('value', 'text', array(
-            'label_render' => false,
+            // 'label_render' => false,
             'constraints' => new NotBlank()
         ));
 	}

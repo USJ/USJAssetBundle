@@ -1,9 +1,7 @@
 <?php
 namespace MDB\AssetBundle\Document;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Symfony\Component\Validator\Constraints as Assert;
 use MDB\AssetBundle\Validator\Constraints\UniqueAssetCode;
 
 /**
@@ -17,12 +15,12 @@ abstract class Asset
     protected $properties;
 
     /**
-     * @MongoDB\Field(type="timestamp")
+     * @MongoDB\Date
      */
     protected $createdAt;
 
     /**
-     * @MongoDB\Field(type="timestamp")
+     * @MongoDB\Date
      */
     protected $updatedAt;
 
@@ -82,7 +80,6 @@ abstract class Asset
      */
     protected $code;
 
-
     /**
      * @MongoDB\String
      */
@@ -93,13 +90,12 @@ abstract class Asset
      */
     protected $oldParentId;
 
-
     protected $logs;
-
 
     public function setCode($code)
     {
         $this->code = $code;
+
         return $this;
     }
 
@@ -111,12 +107,13 @@ abstract class Asset
     /**
      * Set createdAt
      *
-     * @param timestamp $createdAt
+     * @param  timestamp $createdAt
      * @return Asset
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -133,12 +130,13 @@ abstract class Asset
     /**
      * Set updatedAt
      *
-     * @param timestamp $updatedAt
+     * @param  timestamp $updatedAt
      * @return Asset
      */
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -155,12 +153,13 @@ abstract class Asset
     /**
      * Set createdBy
      *
-     * @param string $createdBy
+     * @param  string   $createdBy
      * @return \Comment
      */
     public function setCreatedBy($createdBy)
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -177,12 +176,13 @@ abstract class Asset
     /**
      * Set updatedBy
      *
-     * @param string $updatedBy
+     * @param  string   $updatedBy
      * @return \Comment
      */
     public function setUpdatedBy($updatedBy)
     {
         $this->updatedBy = $updatedBy;
+
         return $this;
     }
 
@@ -199,12 +199,13 @@ abstract class Asset
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string $name
      * @return Asset
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -221,12 +222,13 @@ abstract class Asset
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string $description
      * @return Asset
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -243,12 +245,13 @@ abstract class Asset
     /**
      * Set path
      *
-     * @param string $path
+     * @param  string $path
      * @return Asset
      */
     public function setPath($path)
     {
         $this->path = $path;
+
         return $this;
     }
 
@@ -265,12 +268,15 @@ abstract class Asset
     /**
      * Set parent
      *
-     * @param MDB\AssetBundle\Document\Asset $parent
+     * @param  MDB\AssetBundle\Document\Asset $parent
      * @return Asset
      */
-    public function setParent(\MDB\AssetBundle\Document\Asset $parent = null)
+    public function setParent($parent = null)
     {
-        $this->parent = $parent;
+        if ($parent instanceof \MDB\AssetBundle\Document\Asset) {
+            $this->parent = $parent;
+        }
+
         return $this;
     }
 
@@ -287,12 +293,13 @@ abstract class Asset
     /**
      * Set level
      *
-     * @param int $level
+     * @param  int   $level
      * @return Asset
      */
     public function setLevel($level)
     {
         $this->level = $level;
+
         return $this;
     }
 
@@ -309,12 +316,13 @@ abstract class Asset
     /**
      * Set lockTime
      *
-     * @param date $lockTime
+     * @param  date  $lockTime
      * @return Asset
      */
     public function setLockTime($lockTime)
     {
         $this->lockTime = $lockTime;
+
         return $this;
     }
 
@@ -331,12 +339,13 @@ abstract class Asset
     /**
      * Set status
      *
-     * @param MDB\AssetBundle\Document\Status $status
+     * @param  MDB\AssetBundle\Document\Status $status
      * @return Asset
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -349,7 +358,6 @@ abstract class Asset
     {
         return $this->status;
     }
-
 
     /**
      * add new actions peformed to this asset
@@ -372,12 +380,13 @@ abstract class Asset
     /**
      * Set category
      *
-     * @param string $category
+     * @param  string $category
      * @return Asset
      */
     public function setCategory($category)
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -391,34 +400,35 @@ abstract class Asset
         return $this->category;
     }
 
-
     /**
      * Set properties
      *
-     * @param hash $properties
+     * @param  hash   $properties
      * @return \Asset
      */
     public function setProperties($properties)
     {
         $this->properties = $properties;
+
         return $this;
     }
 
     public function setProperty($propertyId, $name = null, $value = null)
     {
         $result = array();
-        foreach($this->properties as $property) {
-            if($property['id'] == $propertyId ) {
-                if(!is_null($name)) {
+        foreach ($this->properties as $property) {
+            if ($property['id'] == $propertyId) {
+                if (!is_null($name)) {
                     $property['name'] = $name;
                 }
-                if(!is_null($value)){
+                if (!is_null($value)) {
                     $property['value'] = $value;
                 }
             }
             $result[] = $property;
         }
         $this->properties = $result;
+
         return $this;
     }
 
@@ -429,18 +439,20 @@ abstract class Asset
             'name' => $name,
             'value' => $value
             );
+
         return $this;
     }
 
     /**
      * delete properties in specific index.
      *
-     * @param int $index
+     * @param  int    $index
      * @return \Asset
      */
     public function deletePropertyAt($index)
     {
         unset($this->properties[$index]);
+
         return $this;
     }
 
@@ -448,13 +460,14 @@ abstract class Asset
     {
         $key = array_search($this->getProperty($id), $this->properties);
         unset($this->properties[$key]);
+
         return $this;
     }
 
     public function getProperty($id)
     {
-        foreach($this->properties as $property) {
-            if($property['id'] == $id) {
+        foreach ($this->properties as $property) {
+            if ($property['id'] == $id) {
                 return $property;
             }
         }
@@ -474,16 +487,16 @@ abstract class Asset
         return get_class($this);
     }
 
-
     /**
      * Set referenceId
      *
-     * @param string $referenceId
+     * @param  string $referenceId
      * @return \Asset
      */
     public function setReferenceId($referenceId)
     {
         $this->referenceId = $referenceId;
+
         return $this;
     }
 
@@ -502,27 +515,23 @@ abstract class Asset
         $results = array();
         $ids = explode("|", $this->path);
         for ($i=0; $i < count($ids) - 1 ; $i++) {
-            if($ids[$i] == '') {
+            if ($ids[$i] == '') {
                 continue;
             }
             $results[] = substr($ids[$i], -24);
         }
-        return $results;
-    }
 
-    public function getLogs()
-    {
-        return $this->logs;
+        return $results;
     }
 
     public function setAssignee($assignee)
     {
-        $this->assignees[0] = $assignee;
+        $this->assignee = $assignee;
     }
 
     public function getAssignee()
     {
-        return $this->assignees[0];
+        return $this->assignee;
     }
 
     public function getTags()
@@ -544,6 +553,7 @@ abstract class Asset
     public function setOldId($oldId)
     {
         $this->oldId = $oldId;
+
         return $this;
     }
 
@@ -555,6 +565,7 @@ abstract class Asset
     public function setOldParentId($oldParentId)
     {
         $this->oldParentId = $oldParentId;
+
         return $this;
     }
 }

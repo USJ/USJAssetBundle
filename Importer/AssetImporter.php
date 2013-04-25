@@ -29,11 +29,12 @@ class AssetImporter
     public function loadFile($file)
     {
         $this->file = $file;
+        return $this;
     }
 
     public function process($persist = false)
     {
-        $excelReader = new ExcelReader($this->file->getPathname());
+        $excelReader = new ExcelReader($this->file);
         $excelReader->setHeaderRowNumber(0);
 
         $rows = array();
@@ -50,6 +51,7 @@ class AssetImporter
         $this->data = $rows;
 
         $this->collection = $this->getAssetsTree();
+        return $this;
     }
 
     public function persist()
@@ -58,6 +60,7 @@ class AssetImporter
             $this->dm->persist($item);
         }
         $this->dm->flush();
+        return $this->collection;
     }
 
     public function getCollection()
