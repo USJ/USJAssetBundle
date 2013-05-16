@@ -70,6 +70,7 @@ abstract class BaseAssetTreeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(array('getRepository'))
             ->getMock();
+
         return $dm;
     }
 
@@ -79,6 +80,7 @@ abstract class BaseAssetTreeTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->setMethods(array('getChildren'))
             ->getMock();
+
         return $repository;
     }
 
@@ -87,10 +89,10 @@ abstract class BaseAssetTreeTest extends \PHPUnit_Framework_TestCase
         $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
             ->disableOriginalConstructor()
             ->getMock();
+
         return $dispatcher;
     }
 }
-
 
 class MockAsset extends \MDB\AssetBundle\Document\Asset
 {
@@ -101,6 +103,7 @@ class MockAsset extends \MDB\AssetBundle\Document\Asset
     public function setLevel($level)
     {
         $this->level = $level;
+
         return $this;
     }
     public function getLevel()
@@ -110,6 +113,7 @@ class MockAsset extends \MDB\AssetBundle\Document\Asset
     public function setParent($parent)
     {
         $this->parent = $parent;
+
         return $this;
     }
 

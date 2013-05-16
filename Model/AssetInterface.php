@@ -1,8 +1,8 @@
-<?php 
+<?php
 /**
  * Interface for Asset
  */
-interface AssetInterface 
+interface AssetInterface
 {
-	
+
 }

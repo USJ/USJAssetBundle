@@ -3,7 +3,6 @@
 namespace MDB\AssetBundle\EventListener;
 
 use Doctrine\ODM\MongoDB\Event\PreUpdateEventArgs;
-use MDB\AssetBundle\Document\GenericChangeLog;
 use MDB\AssetBundle\Document\Asset;
 /**
 *

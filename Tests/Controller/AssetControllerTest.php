@@ -15,7 +15,7 @@ class AssetControllerTest extends WebTestCase
     }
 
     private function getMockContainer()
-    { 
+    {
         // mock of container
         // return get('something') method
         //  the status mana

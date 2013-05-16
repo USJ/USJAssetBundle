@@ -31,15 +31,15 @@ class PropertiesChangeListener
             $newValue = !is_null($newValue)?$newValue:array();
             $oldValue = !is_null($oldValue)?$oldValue:array();
 
-            if(count($oldValue) == count($newValue)) {
+            if (count($oldValue) == count($newValue)) {
                 $changeType = GenericChangeLog::CHANGE;
             }
 
-            if(count($oldValue) < count($newValue)) {
+            if (count($oldValue) < count($newValue)) {
                 $changeType = GenericChangeLog::ADD;
             }
 
-            if(count($oldValue) > count($newValue)) {
+            if (count($oldValue) > count($newValue)) {
                 $changeType = GenericChangeLog::REMOVE;
             }
 // REFACTOR: This should be move to some class
@@ -116,13 +116,13 @@ class PropertiesChangeListener
         $diff = array_diff($oldFlatArr, $newFlatArr);
         $keys = array_keys($diff);
         $changedProps = array();
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             $changedProp[$oldArr[$key]['name']] =
                 array(
                         'old' => isset($oldArr[$key]) ?$oldArr[$key]['value']:'',
                         'new' => isset($newArr[$key]) ?$newArr[$key]['value']:''
                     );
-            if($changeType == GenericChangeLog::ADD) {
+            if ($changeType == GenericChangeLog::ADD) {
                 $changedProp[$oldArr[$key]['name']] =
                 array(
                         'new' => isset($oldArr[$key]) ?$oldArr[$key]['value']:''
@@ -130,6 +130,7 @@ class PropertiesChangeListener
             }
             $changedProps[$oldArr[$key]['id']] = $changedProp;
         }
+
         return $changedProps;
     }
 

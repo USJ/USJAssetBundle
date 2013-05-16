@@ -55,6 +55,7 @@ abstract class AssetManager
     public function setRepository($repository)
     {
         $this->repository = $repository;
+
         return $this;
     }
 

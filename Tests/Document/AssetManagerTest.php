@@ -2,8 +2,6 @@
 namespace MDB\AssetBundle\Tests\Document;
 
 use MDB\AssetBundle\Document\AssetManager;
-use MDB\AssetBundle\Document\Asset;
-
 
 class AssetManagerTest extends BaseAssetTreeTest
 {

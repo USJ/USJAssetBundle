@@ -1,7 +1,7 @@
-<?php 
+<?php
 namespace MDB\AssetBundle;
 /**
-* 
+*
 */
 final class Events
 {

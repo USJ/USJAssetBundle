@@ -33,7 +33,6 @@ class AssetValidateCommand extends ContainerAwareCommand
         $assetManager = $this->get('mdb_asset.manager.asset');
         // $organizations = $this->get('cloudruge_user.manager.organization')->findAllOrganizations();
 
-
     }
 
     protected function get($serviceName)

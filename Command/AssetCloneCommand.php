@@ -39,7 +39,7 @@ class AssetCloneCommand extends ContainerAwareCommand
             ->getQuery()
             ->getSingleResult();
 
-        if(!$asset) {
+        if (!$asset) {
             throw new \RuntimeException(sprintf('Asset with <comment>%s</comment> was not found', $input->getArgument('asset_id')));
         }
 

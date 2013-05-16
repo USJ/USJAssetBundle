@@ -1,6 +1,5 @@
 <?php namespace MDB\AssetBundle\Tests\Importer;
 
-
 /**
 *
 */

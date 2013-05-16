@@ -23,7 +23,7 @@ class DocumentChangeSubscriber implements EventSubscriberInterface
     public function postLink(LinkEvent $event)
     {
         $asset = $this->assetManager->findAssetById((string) $event->getLink()->getObjectId());
-        if(!$asset) {
+        if (!$asset) {
             return;
         }
 
@@ -38,7 +38,7 @@ class DocumentChangeSubscriber implements EventSubscriberInterface
     public function postUnlink(LinkEvent $event)
     {
         $asset = $this->assetManager->findAssetById((string) $event->getLink()->getObjectId());
-        if(!$asset) {
+        if (!$asset) {
             return;
         }
         $documentLog = new $this->documentLogClass;

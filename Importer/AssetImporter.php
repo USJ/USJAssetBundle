@@ -2,9 +2,6 @@
 namespace MDB\AssetBundle\Importer;
 
 use Ddeboer\DataImport\Workflow;
-use Ddeboer\DataImport\Source\Filter\Unzip;
-use Ddeboer\DataImport\ValueConverter\DateTimeValueConverter;
-use Ddeboer\DataImport\Reader\CsvReader;
 use Ddeboer\DataImport\Reader\ExcelReader;
 
 use Cloudruge\AssetBundle\Document\Asset;
@@ -29,6 +26,7 @@ class AssetImporter
     public function loadFile($file)
     {
         $this->file = $file;
+
         return $this;
     }
 
@@ -42,7 +40,7 @@ class AssetImporter
 
         $workflow->addValueConverter('PROPERTIES', new ValueConverter\PropertiesConverter());
         $workflow->addWriter(new \Ddeboer\DataImport\Writer\CallbackWriter(
-            function($row) use(&$rows) {
+            function($row) use (&$rows) {
                 $rows[] = $row;
             }
         ));
@@ -51,6 +49,7 @@ class AssetImporter
         $this->data = $rows;
 
         $this->collection = $this->getAssetsTree();
+
         return $this;
     }
 
@@ -60,6 +59,7 @@ class AssetImporter
             $this->dm->persist($item);
         }
         $this->dm->flush();
+
         return $this->collection;
     }
 
@@ -79,7 +79,7 @@ class AssetImporter
             $asset->setStatus($item['STATUS']);
             $asset->setCode('A'.str_pad($item['ROW'], 4, '0', STR_PAD_LEFT));
 
-            if(!is_null($item['PROPERTIES'])) {
+            if (!is_null($item['PROPERTIES'])) {
                 foreach ($item['PROPERTIES'] as $name => $value) {
                     $asset->addProperty($name, $value);
                 }
@@ -97,6 +97,7 @@ class AssetImporter
         foreach ($collection as $item) {
             $item->setLevel(self::calcAssetLevel($item));
         }
+
        return $collection;
     }
 
@@ -105,10 +106,11 @@ class AssetImporter
         $count = 1;
         $parent = $asset->getParent();
 
-        while(!is_null($parent)){
+        while (!is_null($parent)) {
             $count += 1;
             $parent = $parent->getParent();
         }
+
         return $count;
     }
 

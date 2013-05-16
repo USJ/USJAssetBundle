@@ -15,6 +15,7 @@ abstract class PropertiesLog extends GenericChangeLog
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 

@@ -1,7 +1,7 @@
-<?php 
+<?php
 namespace MDB\AssetBundle\Event;
 /**
-* 
+*
 */
 use Symfony\Component\EventDispatcher\Event;
 

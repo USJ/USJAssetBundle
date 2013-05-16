@@ -18,6 +18,7 @@ abstract class Log
     public function setCreatedBy($createdBy)
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
 
@@ -29,6 +30,7 @@ abstract class Log
     public function setUpdatedBy($updatedBy)
     {
         $this->updatedBy = $updatedBy;
+
         return $this;
     }
 
@@ -45,6 +47,7 @@ abstract class Log
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 }

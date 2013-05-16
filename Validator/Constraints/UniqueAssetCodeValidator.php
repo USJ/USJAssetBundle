@@ -21,13 +21,13 @@ class UniqueAssetCodeValidator extends ConstraintValidator
         $asset = $this->assetManager->findAssetByCode($value);
         $currentFormId = $this->context->getRoot()->getData()->getId();
 
-        if(!$asset) {
+        if (!$asset) {
             $sameId = false;
-        }else{
+        } else {
             $sameId = $asset->getId() == $currentFormId;
         }
 
-        if($asset && !$sameId) {
+        if ($asset && !$sameId) {
             $this->context->addViolation($constraint->message, array('%code%' => $value));
         }
     }

@@ -1,33 +1,31 @@
-<?php 
+<?php
 
 namespace MDB\AssetBundle\Document;
- 
-use Gedmo\Mapping\Annotation as Gedmo;
+
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @MongoDB\MappedSuperclass
  */
-class Action 
+class Action
 {
-	/** 
-     * @MongoDB\Id 
+    /**
+     * @MongoDB\Id
      */
-	protected $id;
+    protected $id;
 
-	/** 
+    /**
      * @MongoDB\String
      */
-	protected $type;
+    protected $type;
 
-	/** 
+    /**
      * @MongoDB\Timestamp
      */
-	protected $createdAt;
+    protected $createdAt;
 
-    /** 
-     * @MongoDB\Hash 
+    /**
+     * @MongoDB\Hash
      */
     protected $properties = array();
 
@@ -44,12 +42,13 @@ class Action
     /**
      * Set type
      *
-     * @param int $type
+     * @param  int    $type
      * @return Action
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -66,12 +65,13 @@ class Action
     /**
      * Set createdAt
      *
-     * @param timestamp $createdAt
+     * @param  timestamp $createdAt
      * @return Action
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -88,18 +88,20 @@ class Action
     /**
      * Set metadata
      *
-     * @param collection $metadata
+     * @param  collection $metadata
      * @return \Action
      */
     public function setProperties($properties)
     {
         $this->properties = $properties;
+
         return $this;
     }
 
     public function mergeProperties($properties)
     {
         array_merge($this->properties, $properties);
+
         return $this;
     }
     /**

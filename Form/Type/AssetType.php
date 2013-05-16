@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace MDB\AssetBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType,
@@ -11,7 +11,7 @@ use Symfony\Component\Form\AbstractType,
 class AssetType extends AbstractType
 {
     protected $assetClass;
-    
+
     public function __construct($assetClass)
     {
         $this->assetClass = $assetClass;
@@ -28,7 +28,7 @@ class AssetType extends AbstractType
             'required' => false,
             'attr' => array('placeholder' => 'Detail description...')
         ));
-        
+
         $builder->add('referenceId', 'text',  array(
             'label' => 'Reference ID'
         ));
