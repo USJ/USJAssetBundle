@@ -4,7 +4,6 @@ namespace MDB\AssetBundle\Repository;
 
 use Gedmo\Tree\Document\MongoDB\Repository\MaterializedPathRepository;
 
-
 /**
  * AssetRepository
  *
@@ -21,4 +20,8 @@ class AssetRepository extends MaterializedPathRepository
             ->execute();
     }
 
+    public function countChildren($forAsset)
+    {
+        return count($this->getChildren($forAsset, true)->slaveOkay());
+    }
 }

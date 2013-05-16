@@ -36,6 +36,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('model')->isRequired()
                             ->children()
+                                ->scalarNode('vendor')->isRequired()->end()
                                 ->scalarNode('asset')->isRequired()->end()
                                 ->scalarNode('parent_log')->isRequired()->end()
                                 ->scalarNode('properties_log')->isRequired()->end()
@@ -52,12 +53,12 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('manager')->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('asset')->cannotBeEmpty()->defaultValue('mdb_asset.manager.asset.default')->end()
+                                ->scalarNode('vendor')->cannotBeEmpty()->defaultValue('mdb_asset.manager.vendor.default')->end()
                             ->end()
                         ->end()
                     ->end()
                 ->end()
             ->end();
-
 
         return $treeBuilder;
     }

@@ -3,6 +3,10 @@ services:
         class: MDB\AssetBundle\Document\AssetManager
         arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.asset.class% ]
 
+    mdb_asset.manager.vendor.default:
+        class: MDB\AssetBundle\Document\VendorManager
+        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.asset.class% ]
+
     # Form Type
     mdb_asset.form_type.asset:
         class: MDB\AssetBundle\Form\Type\AssetType

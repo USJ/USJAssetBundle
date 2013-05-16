@@ -90,6 +90,21 @@ abstract class Asset
      */
     protected $oldParentId;
 
+    /**
+     * @MongoDB\String
+     */
+    protected $manufacturer;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $model;
+
+    /**
+     * @MongoDB\String
+     */
+    protected $serialnb;
+
     protected $logs;
 
     public function setCode($code)
@@ -271,11 +286,9 @@ abstract class Asset
      * @param  MDB\AssetBundle\Document\Asset $parent
      * @return Asset
      */
-    public function setParent($parent = null)
+    public function setParent($parent)
     {
-        if ($parent instanceof \MDB\AssetBundle\Document\Asset) {
-            $this->parent = $parent;
-        }
+        $this->parent = $parent;
 
         return $this;
     }
@@ -568,4 +581,41 @@ abstract class Asset
 
         return $this;
     }
+
+    public function setManufacturer($manufacturer)
+    {
+        $this->manufacturer = $manufacturer;
+
+        return $this;
+    }
+
+    public function getManufacturer()
+    {
+        return $this->manufacturer;
+    }
+
+    public function setModel($model)
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    public function setSerialnb($serialnb)
+    {
+        $this->serialnb = $serialnb;
+
+        return $this;
+    }
+
+    public function getSerialnb()
+    {
+        return $this->serialnb;
+    }
+
 }

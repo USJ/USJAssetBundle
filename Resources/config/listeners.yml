@@ -28,3 +28,9 @@ services:
         arguments: [@mdb_asset.manager.asset, %mdb_asset.model.document_log.class%]
         tags:
             - { name: kernel.event_subscriber }
+
+    mdb_asset.event_listener.count_asset_children:
+        class: MDB\AssetBundle\EventListener\CountAssetChildrenSubscriber
+        arguments: [%mdb_asset.model.asset.class%]
+        tags:
+            - { name: doctrine_mongodb.odm.event_subscriber }

@@ -22,8 +22,6 @@ class MDBAssetExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $bundles = $container->getParameter('kernel.bundles');
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('search.yml');
@@ -34,6 +32,7 @@ class MDBAssetExtension extends Extension
         $container->setParameter('mdb_asset.form.asset.name', $config['asset']['form']['name']);
 
         $container->setParameter('mdb_asset.model.asset.class', $config['class']['model']['asset']);
+        $container->setParameter('mdb_asset.model.vendor.class', $config['class']['model']['vendor']);
         $container->setParameter('mdb_asset.model.parent_log.class', $config['class']['model']['parent_log']);
         $container->setParameter('mdb_asset.model.properties_log.class', $config['class']['model']['properties_log']);
         $container->setParameter('mdb_asset.model.assign_log.class', $config['class']['model']['assign_log']);
@@ -41,8 +40,7 @@ class MDBAssetExtension extends Extension
         $container->setParameter('mdb_asset.model.document_log.class', $config['class']['model']['document_log']);
         $container->setParameter('mdb_asset.model.delete_log.class', $config['class']['model']['delete_log']);
 
-        // $container->setParameter('mdb_asset.search.asset_provider.class', $config['class']['search_provider']['asset']);
-
         $container->setAlias('mdb_asset.manager.asset', $config['service']['manager']['asset']);
+        $container->setAlias('mdb_asset.manager.vendor', $config['service']['manager']['vendor']);
     }
 }
