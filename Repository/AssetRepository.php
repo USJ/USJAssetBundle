@@ -24,4 +24,23 @@ class AssetRepository extends MaterializedPathRepository
     {
         return count($this->getChildren($forAsset, true)->slaveOkay());
     }
+
+    public function findAndUpdateNbchildren($id, $nbchildren)
+    {
+        return $this->createQueryBuilder()
+            ->findAndUpdate()
+            ->field('_id')->equals($id)
+            ->field('nbchildren')->set((int) $nbchildren)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function updateNbchildren($assetOrId)
+    {
+        if ($assetOrId instanceof \MongoId) {
+            $asset = $this->findById($assetOrId);
+
+            return $this->findAndUpdateNbchildren($assetOrId, $this->countChildren($asset));
+        }
+    }
 }
