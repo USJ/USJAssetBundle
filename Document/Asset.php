@@ -105,6 +105,13 @@ abstract class Asset
      */
     protected $serialnb;
 
+    /**
+     * @MongoDB\Int
+     */
+    protected $nbchildren;
+
+    protected $vendor;
+
     protected $logs;
 
     public function setCode($code)
@@ -616,6 +623,30 @@ abstract class Asset
     public function getSerialnb()
     {
         return $this->serialnb;
+    }
+
+        public function getNbchildren()
+    {
+        return $this->nbchildren;
+    }
+
+    public function setNbchildren($number)
+    {
+        $this->nbchildren = $number;
+
+        return $this;
+    }
+
+    public function getVendor()
+    {
+        return $this->vendor;
+    }
+
+    public function setVendor($vendor)
+    {
+        $this->vendor = $vendor;
+
+        return $this;
     }
 
 }
