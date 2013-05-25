@@ -577,11 +577,17 @@ abstract class Asset
         return $this;
     }
 
+    /**
+     * Method use in asset cloning
+     */
     public function getOldParentId()
     {
         return $this->oldParentId;
     }
 
+    /**
+     * Method use in asset cloning
+     */
     public function setOldParentId($oldParentId)
     {
         $this->oldParentId = $oldParentId;
@@ -625,7 +631,7 @@ abstract class Asset
         return $this->serialnb;
     }
 
-        public function getNbchildren()
+    public function getNbchildren()
     {
         return $this->nbchildren;
     }
