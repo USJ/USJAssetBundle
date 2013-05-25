@@ -5,6 +5,7 @@ use MDB\AssetBundle\Model\AssetManager as BaseAssetManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\Common\Collections\ArrayCollection;
+use MDB\AssetBundle\Document\Asset;
 
 /**
  *
@@ -54,7 +55,7 @@ class AssetManager extends BaseAssetManager
     /**
      * Create a new asset
      *
-     * @param $asset Asset object
+     * @return \MDB\AssetBundle\Document\Asset
      */
     public function createAsset()
     {
@@ -114,7 +115,8 @@ class AssetManager extends BaseAssetManager
     /**
      * Update an asset
      *
-     * @param $asset given the provided asset
+     * @param \MDB\AssetBundle\Document\Asset $asset given the provided asset
+     * @param bool $andFlush
      */
     public function updateAsset(Asset $asset, $andFlush = true)
     {
@@ -162,7 +164,7 @@ class AssetManager extends BaseAssetManager
      * Asset cloning operation to clone all the children of
      * the asset.
      *
-     * @param Asset
+     * @param \MDB\AssetBundle\Document\Asset $asset
      *
      * @return ArrayCollection
      */

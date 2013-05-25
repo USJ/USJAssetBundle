@@ -110,6 +110,11 @@ abstract class Asset
      */
     protected $nbchildren;
 
+    /**
+     * @MongoDB\String
+     */
+    protected $borrowStatus;
+
     protected $vendor;
 
     protected $logs;
@@ -129,8 +134,8 @@ abstract class Asset
     /**
      * Set createdAt
      *
-     * @param  timestamp $createdAt
-     * @return Asset
+     * @param  Date $createdAt
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
@@ -142,7 +147,7 @@ abstract class Asset
     /**
      * Get createdAt
      *
-     * @return timestamp $createdAt
+     * @return Date $createdAt
      */
     public function getCreatedAt()
     {
@@ -655,4 +660,20 @@ abstract class Asset
         return $this;
     }
 
+    public function getBorrowStatus()
+    {
+        return $this->borrowStatus;
+    }
+
+    /**
+     * @param $borrowStatus string of IN/OUT
+     * @return $this
+     */
+    public function setBorrowStatus($borrowStatus)
+    {
+        if(!in_array($borrowStatus, array('IN', 'OUT'))) { return; }
+        $this->borrowStatus = $borrowStatus;
+
+        return $this;
+    }
 }
