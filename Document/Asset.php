@@ -111,9 +111,11 @@ abstract class Asset
     protected $nbchildren;
 
     /**
-     * @MongoDB\String
+     * have to define mapping in concrete class
+     *
+     * @var Location
      */
-    protected $borrowStatus;
+    protected $location;
 
     protected $vendor;
 
@@ -157,7 +159,7 @@ abstract class Asset
     /**
      * Set updatedAt
      *
-     * @param  timestamp $updatedAt
+     * @param  Date $updatedAt
      * @return Asset
      */
     public function setUpdatedAt($updatedAt)
@@ -170,7 +172,7 @@ abstract class Asset
     /**
      * Get updatedAt
      *
-     * @return timestamp $updatedAt
+     * @return Date $updatedAt
      */
     public function getUpdatedAt()
     {
@@ -181,7 +183,7 @@ abstract class Asset
      * Set createdBy
      *
      * @param  string   $createdBy
-     * @return \Comment
+     * @return $this
      */
     public function setCreatedBy($createdBy)
     {
@@ -660,20 +662,5 @@ abstract class Asset
         return $this;
     }
 
-    public function getBorrowStatus()
-    {
-        return $this->borrowStatus;
-    }
 
-    /**
-     * @param $borrowStatus string of IN/OUT
-     * @return $this
-     */
-    public function setBorrowStatus($borrowStatus)
-    {
-        if(!in_array($borrowStatus, array('IN', 'OUT'))) { return; }
-        $this->borrowStatus = $borrowStatus;
-
-        return $this;
-    }
 }
