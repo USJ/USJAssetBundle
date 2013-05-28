@@ -32,6 +32,7 @@ class MDBAssetExtension extends Extension
         $container->setParameter('mdb_asset.form.asset.name', $config['asset']['form']['name']);
 
         $container->setParameter('mdb_asset.model.asset.class', $config['class']['model']['asset']);
+        $container->setParameter('mdb_asset.model.location.class', $config['class']['model']['location']);
         $container->setParameter('mdb_asset.model.vendor.class', $config['class']['model']['vendor']);
         $container->setParameter('mdb_asset.model.parent_log.class', $config['class']['model']['parent_log']);
         $container->setParameter('mdb_asset.model.properties_log.class', $config['class']['model']['properties_log']);

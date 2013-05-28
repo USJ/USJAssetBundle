@@ -3,8 +3,8 @@ namespace MDB\AssetBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
-* @MongoDB\MappedSuperclass
-*/
+ * @MongoDB\MappedSuperclass
+ */
 abstract class GenericChangeLog extends Log
 {
 

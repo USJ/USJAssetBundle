@@ -117,6 +117,11 @@ abstract class Asset
      */
     protected $location;
 
+    /**
+     * embedded document of InOut
+     */
+    protected $inOut;
+
     protected $vendor;
 
     protected $logs;
@@ -659,6 +664,17 @@ abstract class Asset
     {
         $this->vendor = $vendor;
 
+        return $this;
+    }
+
+    public function getInOut()
+    {
+        return $this->inOut;
+    }
+
+    public function setInOut($inOut)
+    {
+        $this->inOut = $inOut;
         return $this;
     }
 

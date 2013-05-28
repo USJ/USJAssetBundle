@@ -36,6 +36,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->arrayNode('model')->isRequired()
                             ->children()
+                                ->scalarNode('location')->isRequired()->end()
                                 ->scalarNode('vendor')->isRequired()->end()
                                 ->scalarNode('asset')->isRequired()->end()
                                 ->scalarNode('parent_log')->isRequired()->end()
