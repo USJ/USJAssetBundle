@@ -55,6 +55,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('asset')->cannotBeEmpty()->defaultValue('mdb_asset.manager.asset.default')->end()
                                 ->scalarNode('vendor')->cannotBeEmpty()->defaultValue('mdb_asset.manager.vendor.default')->end()
+                                ->scalarNode('location')->cannotBeEmpty()->defaultValue('mdb_asset.manager.location.default')->end()
                             ->end()
                         ->end()
                     ->end()

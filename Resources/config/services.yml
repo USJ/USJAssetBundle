@@ -5,7 +5,11 @@ services:
 
     mdb_asset.manager.vendor.default:
         class: MDB\AssetBundle\Document\VendorManager
-        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.asset.class% ]
+        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.vendor.class% ]
+
+    mdb_asset.manager.location.default:
+        class: MDB\AssetBundle\Document\LocationManager
+        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.location.class%]
 
     # Form Type
     mdb_asset.form_type.asset:

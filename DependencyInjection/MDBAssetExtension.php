@@ -43,5 +43,7 @@ class MDBAssetExtension extends Extension
 
         $container->setAlias('mdb_asset.manager.asset', $config['service']['manager']['asset']);
         $container->setAlias('mdb_asset.manager.vendor', $config['service']['manager']['vendor']);
+        $container->setAlias('mdb_asset.manager.location', $config['service']['manager']['location']);
+
     }
 }

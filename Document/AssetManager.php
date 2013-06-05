@@ -102,6 +102,21 @@ class AssetManager extends BaseAssetManager
     }
 
     /**
+     * Find asset with given asset code
+     *
+     * @param $code string
+     *
+     * @return MDB\AssetBundle\Document\Asset
+     */
+    public function findAssetByCode($code)
+    {
+        return $this->findAssetBy(array(
+            'code'=>$code
+            )
+        );
+    }
+
+    /**
      * Delete an asset
      *
      * @param $asset asset object
@@ -115,8 +130,8 @@ class AssetManager extends BaseAssetManager
     /**
      * Update an asset
      *
-     * @param \MDB\AssetBundle\Document\Asset $asset given the provided asset
-     * @param bool $andFlush
+     * @param \MDB\AssetBundle\Document\Asset $asset    given the provided asset
+     * @param bool                            $andFlush
      */
     public function updateAsset(Asset $asset, $andFlush = true)
     {

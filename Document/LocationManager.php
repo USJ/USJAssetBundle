@@ -1,26 +1,33 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: leongmarco
- * Date: 5/27/13
- * Time: 10:59 AM
- * To change this template use File | Settings | File Templates.
- */
 
 namespace MDB\AssetBundle\Document;
 
+use MDB\AssetBundle\Document\Location;
 
 class LocationManager {
-    public function findAssetsByLocation($location)
+
+    protected $dispatcher;
+
+    protected $dm;
+
+    protected $class;
+
+    public function __construct($dispatcher, $dm, $class)
     {
+        $this->dispatcher = $dispatcher;
+        $this->dm = $dm;
+        $this->class = $class;
     }
 
     public function createLocation()
     {
+        return new $this->class;
     }
 
-    public function changeLocation($asset, $toLocation)
+    public function saveLocation(Location $location)
     {
-//        Jsonify the change in the LocationLog
+        $this->dm->persist($location);
+        $this->dm->flush();
     }
+
 }
