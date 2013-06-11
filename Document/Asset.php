@@ -141,7 +141,7 @@ abstract class Asset
     /**
      * Set createdAt
      *
-     * @param  Date $createdAt
+     * @param Date $createdAt
      * @return $this
      */
     public function setCreatedAt($createdAt)
@@ -164,7 +164,7 @@ abstract class Asset
     /**
      * Set updatedAt
      *
-     * @param  Date $updatedAt
+     * @param  Date  $updatedAt
      * @return Asset
      */
     public function setUpdatedAt($updatedAt)
@@ -187,7 +187,7 @@ abstract class Asset
     /**
      * Set createdBy
      *
-     * @param  string   $createdBy
+     * @param string $createdBy
      * @return $this
      */
     public function setCreatedBy($createdBy)
@@ -389,24 +389,6 @@ abstract class Asset
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * add new actions peformed to this asset
-     */
-    public function addAction(\MDB\AssetBundle\Document\Action $action)
-    {
-        $this->actions[] = $action;
-    }
-
-    /**
-     * Get actions
-     *
-     * @return Doctrine\Common\Collections\Collection $actions
-     */
-    public function getActions()
-    {
-        return $this->actions;
     }
 
     /**
@@ -675,8 +657,8 @@ abstract class Asset
     public function setInOut($inOut)
     {
         $this->inOut = $inOut;
+
         return $this;
     }
-
 
 }
