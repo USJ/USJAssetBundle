@@ -5,8 +5,8 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
-*
-*/
+ * Validate the asset code to make sure its uniqueness.
+ */
 class UniqueAssetCodeValidator extends ConstraintValidator
 {
     protected $assetManager;
@@ -19,16 +19,19 @@ class UniqueAssetCodeValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         $asset = $this->assetManager->findAssetByCode($value);
-        $currentFormId = $this->context->getRoot()->getData()->getId();
+        $root = $this->context->getRoot();
 
-        if (!$asset) {
-            $sameId = false;
-        } else {
-            $sameId = $asset->getId() == $currentFormId;
+        if ($root instanceof \Symfony\Component\Form\FormInterface) {
+            $idToValidate = $root->getData()->getId();
         }
 
-        if ($asset && !$sameId) {
+        if ($root instanceof \MDB\AssetBundle\Document\Asset) {
+            $idToValidate = $root->getId();
+        }
+
+        if ($asset && $idToValidate && $asset->getId() != $idToValidate) {
             $this->context->addViolation($constraint->message, array('%code%' => $value));
         }
     }
+
 }
