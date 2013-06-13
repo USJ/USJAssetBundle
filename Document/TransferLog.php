@@ -4,13 +4,13 @@ namespace MDB\AssetBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * Class InOutLog
+ * Class Transfer Log
  * @package MDB\AssetBundle\Document
  *
  * @MongoDB\MappedSuperclass
  */
-abstract class InOutLog extends Log {
-
+abstract class TransferLog extends Log
+{
     /**
      * @MongoDB\Date
      */
@@ -34,12 +34,22 @@ abstract class InOutLog extends Log {
     /**
      * @MongoDB\ReferenceOne
      */
-    protected $user;
+    protected $toUser;
 
     /**
      * @MongoDB\ReferenceOne
      */
-    protected $location;
+    protected $toLocation;
+
+    /**
+     * @MongoDB\ReferenceOne
+     */
+    protected $fromUser;
+
+    /**
+     * @MongoDB\ReferenceOne
+     */
+    protected $fromLocation;
 
     /**
      * @MongoDB\String
@@ -47,20 +57,25 @@ abstract class InOutLog extends Log {
     protected $comment;
 
     /**
-     * @var string $type
+     * @MongoDB\String
      */
-    protected $type;
+    protected $transferType;
 
+    /**
+     * @MongoDB\String
+     */
+    protected $transferStatus;
 
     /**
      * Set startedAt
      *
-     * @param date $startedAt
+     * @param  date $startedAt
      * @return self
      */
     public function setStartedAt($startedAt)
     {
         $this->startedAt = $startedAt;
+
         return $this;
     }
 
@@ -83,6 +98,7 @@ abstract class InOutLog extends Log {
     public function setStartedBy($startedBy)
     {
         $this->startedBy = $startedBy;
+
         return $this;
     }
 
@@ -99,12 +115,13 @@ abstract class InOutLog extends Log {
     /**
      * Set endedAt
      *
-     * @param date $endedAt
+     * @param  date $endedAt
      * @return self
      */
     public function setEndedAt($endedAt)
     {
         $this->endedAt = $endedAt;
+
         return $this;
     }
 
@@ -121,12 +138,13 @@ abstract class InOutLog extends Log {
     /**
      * Set endedBy
      *
-     * @param string $endedBy
+     * @param  string $endedBy
      * @return self
      */
     public function setEndedBy($endedBy)
     {
         $this->endedBy = $endedBy;
+
         return $this;
     }
 
@@ -149,6 +167,7 @@ abstract class InOutLog extends Log {
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -171,6 +190,7 @@ abstract class InOutLog extends Log {
     public function setLocation($location)
     {
         $this->location = $location;
+
         return $this;
     }
 
@@ -187,12 +207,13 @@ abstract class InOutLog extends Log {
     /**
      * Set comment
      *
-     * @param string $comment
+     * @param  string $comment
      * @return self
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
     }
 
@@ -206,25 +227,75 @@ abstract class InOutLog extends Log {
         return $this->comment;
     }
 
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return self
-     */
-    public function setType($type)
+    public function getTransferType()
     {
-        $this->type = $type;
+        return $this->transferType;
+    }
+
+    public function setTransferType($transferType)
+    {
+        $this->transferType = $transferType;
+
         return $this;
     }
 
-    /**
-     * Get type
-     *
-     * @return string $type
-     */
-    public function getType()
+    public function getTransferStatus()
     {
-        return $this->type;
+        return $this->transferStatus;
+    }
+
+    public function setTransferStatus($transferStatus)
+    {
+        $this->transferStatus = $transferStatus;
+
+        return $this;
+    }
+
+    public function getFromUser()
+    {
+        return $this->fromUser;
+    }
+
+    public function setFromUser($fromUser)
+    {
+        $this->fromUser = $fromUser;
+
+        return $this;
+    }
+
+    public function getToUser()
+    {
+        return $this->toUser;
+    }
+
+    public function setToUser($toUser)
+    {
+        $this->toUser = $toUser;
+
+        return $this;
+    }
+
+    public function getFromLocation()
+    {
+        return $this->fromLocation;
+    }
+
+    public function setFromLocation($fromLocation)
+    {
+        $this->fromLocation = $fromLocation;
+
+        return $this;
+    }
+
+    public function getToLocation()
+    {
+        return $this->toLocation;
+    }
+
+    public function setToLocation($toLocation)
+    {
+        $this->toLocation = $toLocation;
+
+        return $this;
     }
 }
