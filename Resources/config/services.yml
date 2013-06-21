@@ -41,3 +41,9 @@ services:
     mdb_asset.importer.asset:
         class: MDB\AssetBundle\Importer\AssetImporter
         arguments: [@doctrine.odm.mongodb.document_manager]
+
+    mdb_asset.serializer.handler.asset_parent:
+        class: MDB\AssetBundle\Serializer\Handler\AssetParentHandler
+        arguments: [@mdb_asset.manager.asset]
+        tags:
+            - { name: jms_serializer.handler, type: MDBAssetParent, direction: deserialization, format: json, method: deserializeJsonToAssetParent }
