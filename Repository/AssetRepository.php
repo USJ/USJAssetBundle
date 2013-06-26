@@ -43,4 +43,13 @@ class AssetRepository extends MaterializedPathRepository
             return $this->findAndUpdateNbchildren($assetOrId, $this->countChildren($asset));
         }
     }
+
+    public function findDistinctTags()
+    {
+        return $this->createQueryBuilder()
+            ->distinct('tags')
+            ->hydrate(false)
+            ->getQuery()
+            ->execute();
+    }
 }
