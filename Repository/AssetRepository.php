@@ -20,6 +20,14 @@ class AssetRepository extends MaterializedPathRepository
             ->execute();
     }
 
+    public function findAssetById($id)
+    {
+        return $this->createQueryBuilder('MDB\AssetBundle\Document\Asset')
+            ->field('_id')->equals($id)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
     public function countChildren($forAsset)
     {
         return count($this->getChildren($forAsset, true)->slaveOkay());

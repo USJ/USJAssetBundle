@@ -47,3 +47,10 @@ services:
         arguments: [@mdb_asset.manager.asset]
         tags:
             - { name: jms_serializer.handler, type: MDBAssetParent, direction: deserialization, format: json, method: deserializeJsonToAssetParent }
+
+    mdb_asset.serializer.handler.reference_many_asset:
+        class: MDB\AssetBundle\Serializer\Handler\ReferenceManyHandler
+        arguments: [@doctrine.odm.mongodb.document_manager, @jms_serializer]
+        tags:
+            - { name: jms_serializer.handler, type: ReferenceMany, direction: deserialization, format: json, method: deserialize }
+            - { name: jms_serializer.handler, type: ReferenceMany, direction: serialization, format: json, method: serialize }
