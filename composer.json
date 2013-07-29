@@ -7,7 +7,7 @@
     "license": "MIT",
     "authors": [{
         "name": "Marco Leong",
-        "email": "marcoleong@usj.edu.mo"
+        "email": "leong.chou.kin@usj.edu.mo"
 	}],
     "require": {
         "php": ">=5.3.2",

@@ -62,11 +62,6 @@ abstract class TransferLog extends Log
     protected $transferType;
 
     /**
-     * @MongoDB\String
-     */
-    protected $transferStatus;
-
-    /**
      * Set startedAt
      *
      * @param  date $startedAt
