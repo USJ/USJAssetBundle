@@ -443,18 +443,37 @@ abstract class Asset
         }
         $this->properties = $result;
 
-        return $this;
+    return $this;
+    }
+
+    public function hasProperty($name)
+    {
+        if (count($this->properties) < 1) {
+            return false;
+        }
+
+        foreach ($this->properties as $property) {
+            if ($property['name'] == $name) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function addProperty($name, $value)
     {
-        $this->properties[] = array(
-            'id' => uniqid(),
-            'name' => $name,
-            'value' => $value
+        if (!$this->hasProperty($name)) {
+            $this->properties[] = array(
+                'id' => uniqid(),
+                'name' => $name,
+                'value' => $value
             );
 
-        return $this;
+            return $this;
+        }
+
+        return false;
     }
 
     /**

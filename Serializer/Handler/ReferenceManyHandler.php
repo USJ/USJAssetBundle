@@ -47,8 +47,14 @@ class ReferenceManyHandler
 
     public function serialize(JsonSerializationVisitor $visitor, $data, array $type, Context $context)
     {
-        $type['name'] = 'Doctrine\ODM\MongoDB\PersistentCollection';
-        
-        return $context->getNavigator()->accept($data, $type, $context);
+        $rs = array();
+
+        foreach ($data as $item) {
+            $rs[] = array(
+                'id' => $item->getId()
+            );
+        }
+
+        return $rs;
     }
 }
