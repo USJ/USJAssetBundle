@@ -4,10 +4,11 @@ namespace MDB\AssetBundle\Serializer\Handler;
 use JMS\Serializer\JsonDeserializationVisitor;
 use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\Context;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
-*
-*/
+ *
+ */
 class ReferenceManyHandler
 {
     protected $documentManager;
@@ -49,10 +50,23 @@ class ReferenceManyHandler
     {
         $rs = array();
 
+        $paramsName = array_map(function ($item) {
+                return $item['name'];
+            },
+            $type['params'][1]['params']
+        );
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
         foreach ($data as $item) {
-            $rs[] = array(
-                'id' => $item->getId()
-            );
+            $rsArr = array();
+            $rsArr['id'] = $item->getId();
+
+            foreach ($paramsName as $fieldName) {
+                $rsArr[$fieldName] = $accessor->getValue($item, $fieldName);
+            }
+
+            $rs[] = $rsArr;
         }
 
         return $rs;
