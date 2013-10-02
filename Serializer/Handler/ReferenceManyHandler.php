@@ -48,25 +48,30 @@ class ReferenceManyHandler
 
     public function serialize(JsonSerializationVisitor $visitor, $data, array $type, Context $context)
     {
+        $exclusionStrategy = $context->getExclusionStrategy();
+        $class = $type['params'][0]['name'];
+
+        $metadata = $context->getMetadataFactory()->getMetadataForClass($class);
         $rs = array();
-
-        $paramsName = array_map(function ($item) {
-                return $item['name'];
-            },
-            $type['params'][1]['params']
-        );
-
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        foreach ($data as $item) {
-            $rsArr = array();
-            $rsArr['id'] = $item->getId();
+        if (isset($type['params'][2])) { // use serialize context is specify
+            $subContext = new \JMS\Serializer\SerializationContext();
+            $subContext->setGroups(array($type['params'][2]['name']));
+            $context = $subContext;
+        }
 
-            foreach ($paramsName as $fieldName) {
-                $rsArr[$fieldName] = $accessor->getValue($item, $fieldName);
+        foreach ($data as $object) {
+            $singleRs = array();
+            foreach ($metadata->propertyMetadata as $propertyMetadata) {
+                if ($exclusionStrategy->shouldSkipProperty($propertyMetadata, $context)) {
+                    continue;
+                }
+
+                $value = $accessor->getValue($object, $propertyMetadata->name);
+                $singleRs[$propertyMetadata->name] = $value;
             }
-
-            $rs[] = $rsArr;
+            $rs[] = $singleRs;
         }
 
         return $rs;
