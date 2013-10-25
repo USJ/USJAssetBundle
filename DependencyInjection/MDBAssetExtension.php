@@ -25,7 +25,11 @@ class MDBAssetExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('search.yml');
-        $loader->load('listeners.yml');
+
+        if ($config['listener']) {
+            $loader->load('listeners.yml');
+        }
+        
         $loader->load('validators.yml');
 
         $container->setParameter('mdb_asset.form.asset.type', $config['asset']['form']['type']);
