@@ -4,14 +4,12 @@ namespace MDB\AssetBundle\Document;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- *
  * Service to manage vendor
  * 
  * @author Marco Leong <marcoleong@cloudruge.com>
  */
 class VendorManager
 {
-
     /**
      * @var EventDispatcherInterface
      */
