@@ -1,63 +1,51 @@
 <?php
 
 namespace MDB\AssetBundle\Document;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
  * Class Transfer Log
  * @package MDB\AssetBundle\Document
  *
- * @MongoDB\MappedSuperclass
  */
 abstract class TransferLog extends Log
 {
     /**
-     * @MongoDB\Date
      */
     protected $startedAt;
 
     /**
-     * @MongoDB\ReferenceOne
      */
     protected $startedBy;
 
     /**
-     * @MongoDB\Date
      */
     protected $endedAt;
 
     /**
-     * @MongoDB\String
      */
     protected $endedBy;
 
     /**
-     * @MongoDB\ReferenceOne
      */
     protected $toUser;
 
     /**
-     * @MongoDB\ReferenceOne
      */
     protected $toLocation;
 
     /**
-     * @MongoDB\ReferenceOne
      */
     protected $fromUser;
 
     /**
-     * @MongoDB\ReferenceOne
      */
     protected $fromLocation;
 
     /**
-     * @MongoDB\String
      */
     protected $comment;
 
     /**
-     * @MongoDB\String
      */
     protected $transferType;
 

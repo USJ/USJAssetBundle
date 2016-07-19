@@ -10,23 +10,18 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 /**
  * Class Location
  * @package MDB\AssetBundle\Document
- *
- * @MongoDB\MappedSuperclass
  */
 abstract class Location {
 
     /**
-     * @MongoDB\EmbedOne
      */
     protected $coordinates;
 
     /**
-     * @MongoDB\String
      */
     protected $name;
 
     /**
-     * @MongoDB\String
      */
     protected $path;
 

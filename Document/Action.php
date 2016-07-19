@@ -2,30 +2,23 @@
 
 namespace MDB\AssetBundle\Document;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-
 /**
- * @MongoDB\MappedSuperclass
  */
 class Action
 {
     /**
-     * @MongoDB\Id
      */
     protected $id;
 
     /**
-     * @MongoDB\String
      */
     protected $type;
 
     /**
-     * @MongoDB\Timestamp
      */
     protected $createdAt;
 
     /**
-     * @MongoDB\Hash
      */
     protected $properties = array();
 

@@ -1,0 +1,9 @@
+MDB\AssetBundle\Document\GenericChangeLog:
+    type: mappedSuperclass
+    fields:
+        from:
+            type: string
+        to:
+            type: string
+        changeType:
+            type: int

@@ -1,0 +1,31 @@
+MDB\AssetBundle\Document\Asset:
+    type: mappedSuperclass
+    fields:
+        name:
+            type: string
+        createdAt:
+            type: date
+        updatedAt:
+            type: date
+        properties:
+            type: hash
+        description:
+            type: string
+        referenceId:
+            type: string
+        path:
+            type: string
+        level:
+            type: int
+        lockTime:
+            type: date
+        category:
+            type: string
+        tags:
+            type: collection
+        code:
+            type: string
+        manufacturer:
+            type: string
+
+

@@ -1,9 +1,7 @@
 <?php
 namespace MDB\AssetBundle\Document;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\MappedSuperclass
  */
 abstract class Log
 {
@@ -11,7 +9,6 @@ abstract class Log
     protected $createdAt;
 
     /**
-     * @MongoDB\String
      */
     protected $type;
 

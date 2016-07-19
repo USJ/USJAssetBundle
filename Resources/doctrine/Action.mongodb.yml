@@ -1,0 +1,10 @@
+MDB\AssetBundle\Document\Action:
+    type: mappedSuperclass
+    fields:
+        type:
+            type: string
+        createdAt:
+            type: date
+        properties:
+            type: hash
+

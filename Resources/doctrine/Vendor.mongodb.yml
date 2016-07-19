@@ -1,0 +1,12 @@
+MDB\AssetBundle\Document\Vendor:
+    type: mappedSuperclass
+    fields:
+        name:
+            type: string
+        description:
+            type: string
+        email:
+            type: string
+        phones:
+            type: hash
+

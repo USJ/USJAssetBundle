@@ -1,0 +1,6 @@
+MDB\AssetBundle\Document\Log:
+    type: mappedSuperclass
+    fields:
+        type:
+            type: string
+

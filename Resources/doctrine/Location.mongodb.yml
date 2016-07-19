@@ -1,0 +1,8 @@
+MDB\AssetBundle\Document\Location:
+    type: mappedSuperclass
+    fields:
+        name:
+            type: string
+        path:
+            type: date
+

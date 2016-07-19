@@ -1,9 +1,7 @@
 <?php
 namespace MDB\AssetBundle\Document;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\MappedSuperclass
  */
 abstract class GenericChangeLog extends Log
 {
@@ -13,17 +11,14 @@ abstract class GenericChangeLog extends Log
     const REMOVE = 2;
 
     /**
-     * @MongoDB\String
      */
     protected $from;
 
     /**
-     * @MongoDB\String
      */
     protected $to;
 
     /**
-     * @MongoDB\Int
      */
     protected $changeType;
 

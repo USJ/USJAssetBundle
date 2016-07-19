@@ -1,112 +1,80 @@
 <?php
 namespace MDB\AssetBundle\Document;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use MDB\AssetBundle\Validator\Constraints\UniqueAssetCode;
 
 /**
- * @MongoDB\MappedSuperclass
  */
 abstract class Asset
 {
     /**
-     * @MongoDB\Hash
      */
     protected $properties;
 
     /**
-     * @MongoDB\Date
-     */
-    protected $createdAt;
-
-    /**
-     * @MongoDB\Date
-     */
-    protected $updatedAt;
-
-    /**
-     * @MongoDB\Field(type="string")
      */
     protected $name;
 
     /**
-     * @MongoDB\Field(type="string")
      */
     protected $description;
 
     /**
-     * @MongoDB\Field(type="string")
      */
     protected $referenceId;
 
     /**
-     * @MongoDB\Field(type="string")
      */
     protected $path;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Asset")
      */
     protected $parent;
 
     /**
-     * @MongoDB\Field(type="int")
      */
     protected $level;
 
     /**
-     * @MongoDB\Field(type="date")
      */
     protected $lockTime;
 
     /**
-     * @MongoDB\String
      */
     protected $category;
 
     /**
-     * @MongoDB\String
      */
     protected $assignee;
 
     /**
-     * @MongoDB\Collection
      */
     protected $tags = array();
 
     /**
-     * @MongoDB\String
-     * @UniqueAssetCode
      */
     protected $code;
 
     /**
-     * @MongoDB\String
      */
     protected $oldId;
 
     /**
-     * @MongoDB\String
      */
     protected $oldParentId;
 
     /**
-     * @MongoDB\String
      */
     protected $manufacturer;
 
     /**
-     * @MongoDB\String
      */
     protected $model;
 
     /**
-     * @MongoDB\String
      */
     protected $serialnb;
 
     /**
-     * @MongoDB\Int
      */
     protected $nbchildren;
 
@@ -136,98 +104,6 @@ abstract class Asset
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param Date $createdAt
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return Date $createdAt
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param  Date  $updatedAt
-     * @return Asset
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return Date $updatedAt
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return $this
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string $createdBy
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param  string   $updatedBy
-     * @return \Comment
-     */
-    public function setUpdatedBy($updatedBy)
-    {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return string $updatedBy
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
     }
 
     /**
