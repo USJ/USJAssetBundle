@@ -1,6 +1,6 @@
 services:
     mdb_asset.validator.unique_asset_code:
         class: MDB\AssetBundle\Validator\Constraints\UniqueAssetCodeValidator
-        arguments: [@mdb_asset.manager.asset]
+        arguments: ['@mdb_asset.manager.asset']
         tags:
             - { name: validator.constraint_validator, alias: mdb_asset.unique_asset_code }

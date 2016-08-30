@@ -1,20 +1,20 @@
 services:
     mdb_asset.manager.asset.default:
         class: MDB\AssetBundle\Document\AssetManager
-        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.asset.class% ]
+        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", '%mdb_asset.model.asset.class%' ]
 
     mdb_asset.manager.vendor.default:
         class: MDB\AssetBundle\Document\VendorManager
-        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.vendor.class% ]
+        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", '%mdb_asset.model.vendor.class%' ]
 
     mdb_asset.manager.location.default:
         class: MDB\AssetBundle\Document\LocationManager
-        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", %mdb_asset.model.location.class%]
+        arguments: ["@event_dispatcher","@doctrine.odm.mongodb.document_manager", '%mdb_asset.model.location.class%']
 
     # Form Type
     mdb_asset.form_type.asset:
         class: MDB\AssetBundle\Form\Type\AssetType
-        arguments: [%mdb_asset.model.asset.class%]
+        arguments: ['%mdb_asset.model.asset.class%']
         tags:
             - { name: form.type, alias: mdb_asset_asset }
 
@@ -31,26 +31,26 @@ services:
     # Form factory
     mdb_asset.form_factory.asset:
         class: MDB\AssetBundle\Form\Factory\FormFactory
-        arguments: [@form.factory, %mdb_asset.form.asset.name%, %mdb_asset.form.asset.type%]
+        arguments: ['@form.factory', '%mdb_asset.form.asset.name%', '%mdb_asset.form.asset.type%']
 
     mdb_asset.form_factory.asset_property:
         class: MDB\AssetBundle\Form\Factory\FormFactory
-        arguments: [@form.factory, "mdb_asset_asset_property", "mdb_asset_asset_property"]
+        arguments: ['@form.factory', "mdb_asset_asset_property", "mdb_asset_asset_property"]
 
 
     mdb_asset.importer.asset:
         class: MDB\AssetBundle\Importer\AssetImporter
-        arguments: [@doctrine.odm.mongodb.document_manager]
+        arguments: ['@doctrine.odm.mongodb.document_manager']
 
     mdb_asset.serializer.handler.asset_parent:
         class: MDB\AssetBundle\Serializer\Handler\AssetParentHandler
-        arguments: [@mdb_asset.manager.asset]
+        arguments: ['@mdb_asset.manager.asset']
         tags:
             - { name: jms_serializer.handler, type: MDBAssetParent, direction: deserialization, format: json, method: deserializeJsonToAssetParent }
 
     mdb_asset.serializer.handler.reference_many_asset:
         class: MDB\AssetBundle\Serializer\Handler\ReferenceManyHandler
-        arguments: [@doctrine.odm.mongodb.document_manager, @jms_serializer]
+        arguments: ['@doctrine.odm.mongodb.document_manager', '@jms_serializer']
         tags:
             - { name: jms_serializer.handler, type: ReferenceMany, direction: deserialization, format: json, method: deserialize }
             - { name: jms_serializer.handler, type: ReferenceMany, direction: serialization, format: json, method: serialize }
